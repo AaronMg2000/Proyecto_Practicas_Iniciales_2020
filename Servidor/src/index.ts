@@ -28,6 +28,10 @@ class Server{
         });
     }
 }
+//variables globales
 
+//public
+
+//iniciar servidor
 const servidor = new Server();
 servidor.start();

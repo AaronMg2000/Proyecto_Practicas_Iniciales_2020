@@ -1,1 +1,22 @@
-<p>usuario works!</p>
+<div id="app" class="wrapper">
+  <app-principal></app-principal  >
+  <div class="content-wrapper">
+      <section class="p-2 container-fluid">
+          <div class="row">
+            <div class="col-md-4" *ngFor="let usuario of usuarios">
+              <div class="card text-center">
+                <div class="card-header">
+                  {{ usuario.Carne }}
+                </div>
+                <div class="card-body">
+                  <p class="w-100">{{ usuario.Nombres }}</p>
+                  <p class="w-100">{{ usuario.Apellido }}</p>
+                  <p class="w-100">{{ usuario.Correo }}</p>
+                </div>
+                <div class="card-footer"></div>
+              </div>
+            </div>
+          </div>
+      </section>
+  </div>
+</div>

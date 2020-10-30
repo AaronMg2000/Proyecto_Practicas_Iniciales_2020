@@ -10,7 +10,12 @@ import { RestablecerComponent } from './Components/restablecer/restablecer.compo
 import { UsuarioComponent } from './Components/usuario/usuario.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {
+    path: '',
+    redirectTo: '/Login',
+    pathMatch: 'full'
+  },
+  {path: 'Login', component: LoginComponent},
   {path: 'Inicio', component: InicioComponent},
   {path: 'Registro', component: RegistroComponent},
   {path: 'Pensum/:id', component: PensumComponent},

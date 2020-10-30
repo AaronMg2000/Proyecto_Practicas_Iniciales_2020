@@ -12,7 +12,9 @@ import { RegistroComponent } from './Components/registro/registro.component';
 import { RestablecerComponent } from './Components/restablecer/restablecer.component';
 import { UsuarioComponent } from './Components/usuario/usuario.component';
 import { PrincipalComponent } from './Components/Nabvars/principal/principal.component';
-
+import { UsuariosService} from './services/usuarios.service';
+import { HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,9 +31,13 @@ import { PrincipalComponent } from './Components/Nabvars/principal/principal.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    UsuariosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

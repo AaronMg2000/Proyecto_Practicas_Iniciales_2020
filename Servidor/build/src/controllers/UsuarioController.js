@@ -79,3 +79,4 @@ class UsusarioController {
     }
 }
 exports.usuarioController = new UsusarioController();
+//# sourceMappingURL=UsuarioController.js.map

@@ -31,5 +31,9 @@ class Server {
         });
     }
 }
+//variables globales
+//public
+//iniciar servidor
 const servidor = new Server();
 servidor.start();
+//# sourceMappingURL=index.js.map

@@ -7,3 +7,4 @@ class indexController {
     }
 }
 exports.IndexController = new indexController();
+//# sourceMappingURL=indexController.js.map
