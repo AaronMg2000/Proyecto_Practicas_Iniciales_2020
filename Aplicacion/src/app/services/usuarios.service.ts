@@ -29,4 +29,7 @@ export class UsuariosService {
   update(id: string, updatedUser: Usuario){
     return this.http.put(`${this.API_URI}/Usuarios/${id}`, updatedUser);
   }
+  login(usuario: Usuario){
+    return this.http.post(`${this.API_URI}/Usuarios/Login`, usuario);
+  }
 }

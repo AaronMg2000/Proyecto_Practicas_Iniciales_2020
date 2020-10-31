@@ -2,6 +2,7 @@ import expres, {Application} from 'express';
 import IndexRoutes from './routes/IndexRoutes';
 import UsuarioRoutes from './routes/UsuarioRoutes';
 import morgan from 'morgan';
+const session =  require ('express-session');
 import cors from 'cors';
 class Server{
     public app: Application;

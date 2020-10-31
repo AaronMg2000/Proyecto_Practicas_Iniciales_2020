@@ -1,6 +1,8 @@
 import express , {Request, Response} from 'express';
 import pool from '../../DataBase/database';
+const jwt = require('jsonwebtoken');
 import bycrypt  from 'bcryptjs';
+import { json } from 'body-parser';
 class UsusarioController{
     
 
@@ -20,13 +22,10 @@ class UsusarioController{
                     Password: hash,
                     Correo: req.body.Correo
                 };
-                // pass =hash;
-                // console.log(pass);
-                // bycrypt.compare(req.body.Password,pass,function(err,result){
-                //     console.log(result);
-                // });
                 await pool.query('INSERT INTO usuario set ?',[NuevoUsuario]);
-                res.json({text: 'Creando un Usuario'})
+                const secret =  Buffer.from('secretkey', 'base64');
+                var token = jwt.sign({Carne: NuevoUsuario.Carne}, secret);
+                res.status(200).json({token});
             });
         });
     }
@@ -57,6 +56,23 @@ class UsusarioController{
         {
             res.status(404).json({text: 'El usuario no existe en la base de datos'});
         }
+    }
+
+    public async login(req:Request, res:Response){
+        const {Carne, Password} = req.body;
+        const usuario = await pool.query('select * from usuario where Carne = ?',[Carne]);
+        if (!usuario) return res.status(401).send("El correo no existe");
+        var pass="";
+        pass =Password;
+        console.log('Contraseña usuario:'+usuario[0].Password);
+        console.log('Pass:'+pass);
+        bycrypt.compare(pass,usuario[0].Password,function(err,result){
+            console.log(result);
+            if (!result) return res.status(401).send('Contraseña Erronea');
+            const secret =  Buffer.from('secretkey', 'base64');
+            const token = jwt.sign({_id: usuario.Carne}, secret);
+            res.status(200).json({token});
+        });
     }
 }
 

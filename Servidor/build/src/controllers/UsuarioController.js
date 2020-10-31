@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.usuarioController = void 0;
 const database_1 = __importDefault(require("../../DataBase/database"));
+const jwt = require('jsonwebtoken');
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 class UsusarioController {
     list(req, res) {
@@ -36,13 +37,10 @@ class UsusarioController {
                                 Password: hash,
                                 Correo: req.body.Correo
                             };
-                            // pass =hash;
-                            // console.log(pass);
-                            // bycrypt.compare(req.body.Password,pass,function(err,result){
-                            //     console.log(result);
-                            // });
                             yield database_1.default.query('INSERT INTO usuario set ?', [NuevoUsuario]);
-                            res.json({ text: 'Creando un Usuario' });
+                            const secret = Buffer.from('secretkey', 'base64');
+                            var token = jwt.sign({ Carne: NuevoUsuario.Carne }, secret);
+                            res.status(200).json({ token });
                         });
                     });
                 });
@@ -75,6 +73,26 @@ class UsusarioController {
             else {
                 res.status(404).json({ text: 'El usuario no existe en la base de datos' });
             }
+        });
+    }
+    login(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { Carne, Password } = req.body;
+            const usuario = yield database_1.default.query('select * from usuario where Carne = ?', [Carne]);
+            if (!usuario)
+                return res.status(401).send("El correo no existe");
+            var pass = "";
+            pass = Password;
+            console.log('Contraseña usuario:' + usuario[0].Password);
+            console.log('Pass:' + pass);
+            bcryptjs_1.default.compare(pass, usuario[0].Password, function (err, result) {
+                console.log(result);
+                if (!result)
+                    return res.status(401).send('Contraseña Erronea');
+                const secret = Buffer.from('secretkey', 'base64');
+                const token = jwt.sign({ _id: usuario.Carne }, secret);
+                res.status(200).json({ token });
+            });
         });
     }
 }

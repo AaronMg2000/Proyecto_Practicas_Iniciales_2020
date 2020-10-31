@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const IndexRoutes_1 = __importDefault(require("./routes/IndexRoutes"));
 const UsuarioRoutes_1 = __importDefault(require("./routes/UsuarioRoutes"));
 const morgan_1 = __importDefault(require("morgan"));
+const session = require('express-session');
 const cors_1 = __importDefault(require("cors"));
 class Server {
     constructor() {

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DataTablesModule } from 'angular-datatables';
 import { LoginComponent } from './Components/login/login.component';
 import { InicioComponent } from './Components/inicio/inicio.component';
 import { PensumComponent } from './Components/pensum/pensum.component';
@@ -33,7 +34,8 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ],
   providers: [
     UsuariosService
