@@ -16,6 +16,11 @@
         <div class="w-100 mt-3"></div>
         <div class="col col-md-7 col-lg-5">
             <form action="/login" ngNativeValidate method="post">
+                <div *ngIf='mostrar && error' class="form-group">
+                  <div class="alert alert-danger">
+                    {{ error }}
+                  </div>
+                </div>
                 <div class="form-group">
                     <input type="text" [(ngModel)]="usuario.Carne" id="Carne" required name="Carne" class="form-control" style="font-size: 20px;" placeholder="CUI / REGISTRO ACADEMICO / REGISTRO PERSONAL  ">
                 </div>

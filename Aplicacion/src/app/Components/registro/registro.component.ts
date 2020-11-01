@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class RegistroComponent implements OnInit {
 
   @HostBinding('class') classes = 'row';
-
+  reg: any = false;
   usuario: Usuario = {
     Carne: '',
     Nombres: '',
@@ -22,18 +22,31 @@ export class RegistroComponent implements OnInit {
   };
 
   constructor(
-    private usuarioService: UsuariosService,
+    public usuarioService: UsuariosService,
     private router: Router
     ) { }
 
   ngOnInit(): void {}
 
-  CrearUsuario(){
+  comprobarUsuario(carne): any{
+    this.usuarioService.getUsuario(carne).subscribe(
+      res => {
+        this.reg = false;
+      },
+      err => {
+        this.reg = true;
+      }
+    );
+    console.log(this.reg);
+  }
+
+  CrearUsuario(): any{
     this.usuarioService.registrar(this.usuario)
     .subscribe(
       res => {
         console.log(res);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('Carne', this.usuario.Carne);
         this.router.navigate(['/Inicio']);
       },
       err => console.log(err)

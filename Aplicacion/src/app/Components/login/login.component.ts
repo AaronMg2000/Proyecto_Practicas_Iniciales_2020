@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
     Confirmar: '',
     Correo: ''
   };
-
+  error: any = '';
+  mostrar: any = false;
   constructor(
     private usuarioService: UsuariosService,
     private router: Router
@@ -25,15 +26,22 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onLogin(){
+
+  onLogin(): any{
     return this.usuarioService.login(this.usuario)
     .subscribe(
-      res =>{
+      res => {
         console.log(res);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('Carne', this.usuario.Carne);
+        this.error = '';
+        this.mostrar = false;
         this.router.navigate(['/Inicio']);
       },
-      err => console.log(err)
+      err => {
+        this.error = err.error;
+        this.mostrar = true;
+      }
     );
   }
 }

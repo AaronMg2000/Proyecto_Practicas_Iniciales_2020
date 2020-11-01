@@ -18,6 +18,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {AuthGuard} from './auth.guard';
 import {TokenInterceptorService} from './services/token-interceptor.service';
+import { PasswordValidationDirective } from './validations/password-validation.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import {TokenInterceptorService} from './services/token-interceptor.service';
     RegistroComponent,
     RestablecerComponent,
     UsuarioComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    PasswordValidationDirective
   ],
   imports: [
     BrowserModule,

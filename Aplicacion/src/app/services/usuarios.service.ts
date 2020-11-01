@@ -12,37 +12,43 @@ export class UsuariosService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getUsuarios() {
+  getUsuarios(): any {
     return this.http.get<any>(`${this.API_URI}/Usuarios`);
   }
-  getUsuario(id: string){
+
+  getUsuario(id: string): any{
     return this.http.get<any>(`${this.API_URI}/Usuarios/${id}`);
   }
 
-  delete(id:string){
+  delete(id: string): any{
     return this.http.delete<any>(`${this.API_URI}/Usuarios/${id}`);
   }
 
-  registrar(usuario: Usuario){
+  registrar(usuario: Usuario): any{
     return this.http.post<any>(`${this.API_URI}/Usuarios/`, usuario);
   }
 
-  update(id: string, updatedUser: Usuario){
+  update(id: string, updatedUser: Usuario): any{
     return this.http.put<any>(`${this.API_URI}/Usuarios/${id}`, updatedUser);
   }
-  login(usuario: Usuario){
+  login(usuario: Usuario): any{
     return this.http.post<any>(`${this.API_URI}/Usuarios/Login`, usuario);
   }
 
-  loggedIN(){
+  getCarne(): any{
+    return localStorage.getItem('Carne');
+  }
+
+  loggedIN(): any{
     return !!localStorage.getItem('token');
   }
 
-  getToken(){
+  getToken(): any{
     return localStorage.getItem('token');
   }
 
-  cerrarSesion(){
+  cerrarSesion(): any{
+    localStorage.removeItem('Carne');
     localStorage.removeItem('token');
     this.router.navigate(['/Login']);
   }

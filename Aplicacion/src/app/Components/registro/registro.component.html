@@ -17,28 +17,92 @@
         <div class="col col-md-7 col-lg-5 mb-5">
             <form ngNativeValidate action="/Registro" method="POST">
                 <div class="form-group">
-                    <input type="text" id="Carne" name="Carne" [(ngModel)]="usuario.Carne" required class="form-control" style="font-size: 20px;" placeholder="CUI / REGISTRO ACADEMICO / REGISTRO PERSONAL  ">
+                    <input type="text" id="Carne" name="Carne" (keyup)="comprobarUsuario(usuario.Carne)" [(ngModel)]="usuario.Carne" required class="form-control" style="font-size: 20px;" placeholder="CUI / REGISTRO ACADEMICO / REGISTRO PERSONAL  " #Carne="ngModel" minlength="9" maxlength="9">
+                    <div *ngIf="(Carne.invalid && (Carne.dirty || Carne.touched))" class="alert alert-danger">
+                        <div *ngIf="Carne.errors.required">
+                          El Carne es requerido.
+                        </div>
+                        <div *ngIf="Carne.errors.minlength">
+                          La longitud del Carne debe ser de 9.
+                        </div>
+                        <div *ngIf="Carne.errors.maxlength">
+                            La longitud del Carne debe ser de 9.
+                        </div>
+                        <div *ngIf="!reg">
+                          El carne ingresado ya se encuentra registrado.
+                      </div>
+                    </div>
+                    <div *ngIf="(Carne.valid && (Carne.dirty || Carne.touched)) && !reg" class="alert alert-danger">
+                      <div *ngIf="!reg">
+                        El carne ingresado ya se encuentra registrado.
+                      </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="Nombres" name="Nombres" [(ngModel)]="usuario.Nombres" required class="form-control" style="font-size: 20px;" placeholder="Nombres">
+                    <input type="text" id="Nombres" name="Nombres" [(ngModel)]="usuario.Nombres" required class="form-control" style="font-size: 20px;" placeholder="Nombres" #nombre="ngModel">
+                    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+                        <div *ngIf="Carne.errors.required">
+                          El nombre es requerido.
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="Apellidos" name="Apellidos" [(ngModel)]="usuario.Apellido" required class="form-control" style="font-size: 20px;" placeholder="Apellidos">
+                    <input type="text" id="Apellidos" name="Apellidos" [(ngModel)]="usuario.Apellido" required class="form-control" style="font-size: 20px;" placeholder="Apellidos" #apellido="ngModel">
+                    <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="alert alert-danger">
+                        <div *ngIf="apellido.errors.required">
+                          Los apellidos son requeridos.
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="email" id="Correo" name="Correo" [(ngModel)]="usuario.Correo" required class="form-control" style="font-size: 20px;" placeholder="Correo Electronico">
+                    <input type="email" id="Correo" name="Correo" [(ngModel)]="usuario.Correo" required class="form-control" style="font-size: 20px;" placeholder="Correo Electronico" #correo="ngModel">
+                    <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="alert alert-danger">
+                        <div *ngIf="correo.errors.required">
+                          El Correo es requerido.
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password" name="password" [(ngModel)]="usuario.Password" class="form-control" required style="font-size: 20px;" placeholder="CONTRASEÑA">
+                    <input type="password" id="password" name="password" [(ngModel)]="usuario.Password" class="form-control" required style="font-size: 20px;" placeholder="CONTRASEÑA" minlength="8" #password="ngModel" passwordValidation>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched) && password.value!=''" class="alert alert-danger">
+                      <div *ngIf="password.errors.required">
+                        La contraseña es requerida.
+                      </div>
+                      <div *ngIf="password.errors.minlength">
+                        La longitud de la contraseña debe ser mayor o igual a 8.
+                      </div>
+                      <div *ngIf="password.errors.passwordValidation">
+                        {{ password.errors.passwordValidation.message }}
+                      </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="repassword" name="repassword" [(ngModel)]="usuario.Confirmar" class="form-control" required style="font-size: 20px;" placeholder="Repetir Contraseña">
-                    <p class="text-danger {{ usuario.Password=='' && usuario.Confirmar=='' ? 'd-none': usuario.Password!='' && usuario.Confirmar!='' && usuario.Password!=usuario.Confirmar ? 'd-inline': 'd-none' }}">*Las contraseñas no coinciden</p>
+                    <input type="password" id="repassword" name="repassword" [(ngModel)]="usuario.Confirmar" class="form-control" required style="font-size: 20px;" placeholder="Repetir Contraseña" minlength="8" #repassword="ngModel" passwordValidation>
+                    <div *ngIf="((repassword.invalid && (repassword.dirty || repassword.touched))) && repassword.value!=''" class="alert alert-danger">
+                        <div *ngIf="repassword.errors.required">
+                          La contraseña es requerida.
+                        </div>
+                        <div *ngIf="repassword.errors.minlength">
+                          La longitud de la contraseña debe ser mayor o igual a 8.
+                        </div>
+                        <div *ngIf="repassword.errors.passwordValidation">
+                          {{ repassword.errors.passwordValidation.message }}
+                        </div>
+                        <div *ngIf="usuario.Password!='' && usuario.Confirmar!=''">
+                            <p class="{{ usuario.Password=='' && usuario.Confirmar=='' ? 'd-none': usuario.Password!='' && usuario.Confirmar!='' && usuario.Password!=usuario.Confirmar ? 'd-inline': 'd-none' }}">Las contraseñas no coinciden</p>
+                          </div>
+                    </div>
+                    <div *ngIf="repassword.valid && (repassword.dirty || repassword.touched) && usuario.Password!= usuario.Confirmar" class="alert alert-danger">
+                      <div *ngIf="usuario.Password!='' && usuario.Confirmar!=''">
+                          <p class="{{ usuario.Password=='' && usuario.Confirmar=='' ? 'd-none': usuario.Password!='' && usuario.Confirmar!='' && usuario.Password!=usuario.Confirmar ? 'd-inline': 'd-none' }}">Las contraseñas no coinciden</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col col-md-6">
-                            <button class="btn btn-block btn-primary" (click)="CrearUsuario()">Registrar</button>
+                            <button class="btn btn-block btn-primary {{ password.errors || !reg || Carne.errors || usuario.Password!= usuario.Confirmar || repassword.errors || nombre.errors || apellido.errors ? '': 'd-none' }}" disabled>Registrar</button>
+                            <button class="btn btn-block btn-primary {{ password.errors || !reg || Carne.errors || usuario.Password!= usuario.Confirmar || repassword.errors || nombre.errors || apellido.errors ? 'd-none': '' }}"(click)="CrearUsuario()">Registrar</button>
                         </div>
                         <div class="col col-md-6">
                             <input type="reset" class="btn btn-block btn-secondary" value="Cancelar">
