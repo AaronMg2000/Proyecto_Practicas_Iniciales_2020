@@ -15,7 +15,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="" class="nav-link">{{ usuario.Nombres }}</a>
+        <a href="" class="nav-link">{{ usuario.Nombres }} {{ usuario.Apellido }}</a>
       </li>
       <li class="nav-item  d-inline-block">
             <a class="text-white btn btn-secondary" (click)="usuarioService.cerrarSesion()">Salir</a>
@@ -25,47 +25,40 @@
 <aside class="main-sidebar sidebar-dark-orange elevation-4">
     <a href="" class="brand-link">
         <img src="assets/public/IMG/LogoUsac.png" alt="Logo" class="brand-image img-circle elevation-3">
-        <span class="brand-text font-weight-light">Titulo</span>
+        <span class="brand-text font-weight-light">Usac</span>
     </a>
     <div class="sidebar font-weight-bold">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item has-treeview">
-                    <a  class="text-white nav-link" href="">
-                        <i class="nav-icon fas fa-tachometer-alt text-white"></i>
+                    <a  class="text-white nav-link active" href="">
+                        <i class="nav-icon fas fa-user text-white"></i>
                         <p>
-                          LINK1
+                          Usuario
                           <i class="right fas fa-angle-left"></i>
                         </p>
                       </a>
                       <ul class="nav nav-treeview" style='display:blook;'>
                         <li class="nav-item">
                           <a href="" class="nav-link">
-                            <i class="nav-icon demo-icon">&#xe800;</i>
-                            <p>SUB LINK 1</p>
+                            <i class="nav-icon fas fa-address-card">&#xe800;</i>
+                            <p>Perfil</p>
                           </a>
                         </li>
 
                         <li class="nav-item">
-                          <a href="" class="nav-link">
-                            <i class="nav-icon demo-icon">&#xe812;</i>
-                            <p>SUB LINK2</p>
-                          </a>
-                        </li>
-
-                        <li class="nav-item">
-                          <a href="" class="nav-link ">
-                            <i class="nav-icon demo-icon">&#xf1c0;</i>
-                            <p>SUB LINK3</p>
+                          <a href="" class="nav-link active">
+                            <i class="nav-icon fas fa-map">&#xe812;</i>
+                            <p>Pensum</p>
                           </a>
                         </li>
                       </ul>
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link text-white">
-                        <i class="nav-icon demo-icon">&#xe807;</i>
+                        <i class="nav-icon fas fa-home">&#xe807;</i>
                       <p>
-                        LINK2
+                        Inicio
                       </p>
                     </a>
                   </li>
