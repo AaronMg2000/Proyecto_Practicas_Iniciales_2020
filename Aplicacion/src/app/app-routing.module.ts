@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'Usuario/:id', component: UsuarioComponent, canActivate: [AuthGuard]},
   {path: 'Restablecer', component: RestablecerComponent, canActivate: [AuthGuard]},
   {path: 'Publicacion/:id', component: PublicacionComponent, canActivate: [AuthGuard]},
-  {path: 'Perfil/:id', component: UsuarioComponent, canActivate: [AuthGuard]},
+  {path: 'Perfil', component: UsuarioComponent, canActivate: [AuthGuard]},
   {path: '**', component: Page404Component}
 ];
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {UsuariosService} from '../../services/usuarios.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
-  constructor() { }
+  usuario: any = [];
+
+  constructor(public usuarioService: UsuariosService) { }
 
   ngOnInit(): void {
+    const carne = this.usuarioService.getCarne();
+    this.usuarioService.getUsuario(carne).subscribe(
+      res => {
+        this.usuario = res;
+      },
+      err => console.error(err)
+    );
   }
 
 }
