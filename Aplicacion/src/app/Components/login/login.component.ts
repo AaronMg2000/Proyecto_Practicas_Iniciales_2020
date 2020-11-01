@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import {UsuariosService} from '../../services/usuarios.service';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,17 +18,22 @@ export class LoginComponent implements OnInit {
     Correo: ''
   };
 
-  constructor(private usuarioService: UsuariosService) { }
+  constructor(
+    private usuarioService: UsuariosService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
   }
   onLogin(){
     return this.usuarioService.login(this.usuario)
     .subscribe(
-      data =>{
-        console.log(data);
+      res =>{
+        console.log(res);
+        localStorage.setItem('token', res.token);
+        this.router.navigate(['/Inicio']);
       },
-      res => console.log(res)
+      err => console.log(err)
     );
   }
 }

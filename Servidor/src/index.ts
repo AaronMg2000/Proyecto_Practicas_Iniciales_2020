@@ -1,7 +1,8 @@
-import expres, {Application} from 'express';
+import expres, {Application, Request, Response} from 'express';
 import IndexRoutes from './routes/IndexRoutes';
 import UsuarioRoutes from './routes/UsuarioRoutes';
 import morgan from 'morgan';
+const jwt = require('jsonwebtoken');
 const session =  require ('express-session');
 import cors from 'cors';
 class Server{
@@ -29,6 +30,8 @@ class Server{
         });
     }
 }
+//fuciones
+
 //variables globales
 
 //public

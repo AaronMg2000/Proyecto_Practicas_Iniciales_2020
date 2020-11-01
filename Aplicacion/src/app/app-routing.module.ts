@@ -8,7 +8,7 @@ import { PublicacionComponent } from './Components/publicacion/publicacion.compo
 import { RegistroComponent } from './Components/registro/registro.component';
 import { RestablecerComponent } from './Components/restablecer/restablecer.component';
 import { UsuarioComponent } from './Components/usuario/usuario.component';
-
+import {AuthGuard} from '././auth.guard';
 const routes: Routes = [
   {
     path: '',
@@ -16,13 +16,13 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {path: 'Login', component: LoginComponent},
-  {path: 'Inicio', component: InicioComponent},
+  {path: 'Inicio', component: InicioComponent, canActivate: [AuthGuard]},
   {path: 'Registro', component: RegistroComponent},
-  {path: 'Pensum/:id', component: PensumComponent},
-  {path: 'Usuario/:id', component: UsuarioComponent},
-  {path: 'Restablecer', component: RestablecerComponent},
-  {path: 'Publicacion/:id', component: PublicacionComponent},
-  {path: 'Perfil/:id', component: UsuarioComponent},
+  {path: 'Pensum/:id', component: PensumComponent, canActivate: [AuthGuard]},
+  {path: 'Usuario/:id', component: UsuarioComponent, canActivate: [AuthGuard]},
+  {path: 'Restablecer', component: RestablecerComponent, canActivate: [AuthGuard]},
+  {path: 'Publicacion/:id', component: PublicacionComponent, canActivate: [AuthGuard]},
+  {path: 'Perfil/:id', component: UsuarioComponent, canActivate: [AuthGuard]},
   {path: '**', component: Page404Component}
 ];
 

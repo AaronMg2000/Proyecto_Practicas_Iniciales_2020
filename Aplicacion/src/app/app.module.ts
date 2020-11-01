@@ -14,8 +14,10 @@ import { RestablecerComponent } from './Components/restablecer/restablecer.compo
 import { UsuarioComponent } from './Components/usuario/usuario.component';
 import { PrincipalComponent } from './Components/Nabvars/principal/principal.component';
 import { UsuariosService} from './services/usuarios.service';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {AuthGuard} from './auth.guard';
+import {TokenInterceptorService} from './services/token-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,13 @@ import {FormsModule} from '@angular/forms';
     DataTablesModule
   ],
   providers: [
-    UsuariosService
+    UsuariosService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

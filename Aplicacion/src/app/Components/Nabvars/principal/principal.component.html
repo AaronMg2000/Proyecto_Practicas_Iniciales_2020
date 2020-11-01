@@ -18,11 +18,7 @@
         <a href="" class="nav-link">Rudy</a>
       </li>
       <li class="nav-item  d-inline-block">
-            <a class="text-white btn btn-secondary" href=""
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Salir
-                                    </a>
+            <a class="text-white btn btn-secondary" (click)="usuarioService.cerrarSesion()">Salir</a>
                                     
              <form id="logout-form" action="" method="POST" style="display: none;">
                 @csrf

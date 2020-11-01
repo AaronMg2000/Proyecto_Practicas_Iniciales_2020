@@ -39,7 +39,7 @@ class UsusarioController {
                             };
                             yield database_1.default.query('INSERT INTO usuario set ?', [NuevoUsuario]);
                             const secret = Buffer.from('secretkey', 'base64');
-                            var token = jwt.sign({ Carne: NuevoUsuario.Carne }, secret);
+                            var token = jwt.sign({ _id: NuevoUsuario.Carne }, secret);
                             res.status(200).json({ token });
                         });
                     });
@@ -79,7 +79,8 @@ class UsusarioController {
         return __awaiter(this, void 0, void 0, function* () {
             const { Carne, Password } = req.body;
             const usuario = yield database_1.default.query('select * from usuario where Carne = ?', [Carne]);
-            if (!usuario)
+            console.log(usuario);
+            if (usuario.length == 0)
                 return res.status(401).send("El correo no existe");
             var pass = "";
             pass = Password;

@@ -2,7 +2,6 @@ import express , {Request, Response} from 'express';
 import pool from '../../DataBase/database';
 const jwt = require('jsonwebtoken');
 import bycrypt  from 'bcryptjs';
-import { json } from 'body-parser';
 class UsusarioController{
     
 
@@ -24,7 +23,7 @@ class UsusarioController{
                 };
                 await pool.query('INSERT INTO usuario set ?',[NuevoUsuario]);
                 const secret =  Buffer.from('secretkey', 'base64');
-                var token = jwt.sign({Carne: NuevoUsuario.Carne}, secret);
+                var token = jwt.sign({_id: NuevoUsuario.Carne}, secret);
                 res.status(200).json({token});
             });
         });
@@ -61,7 +60,8 @@ class UsusarioController{
     public async login(req:Request, res:Response){
         const {Carne, Password} = req.body;
         const usuario = await pool.query('select * from usuario where Carne = ?',[Carne]);
-        if (!usuario) return res.status(401).send("El correo no existe");
+        console.log(usuario);
+        if (usuario.length==0) return res.status(401).send("El correo no existe");
         var pass="";
         pass =Password;
         console.log('Contraseña usuario:'+usuario[0].Password);
@@ -74,6 +74,7 @@ class UsusarioController{
             res.status(200).json({token});
         });
     }
+
 }
 
 export const usuarioController = new UsusarioController();

@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import {UsuariosService} from '../../services/usuarios.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -20,7 +21,10 @@ export class RegistroComponent implements OnInit {
     Correo: ''
   };
 
-  constructor(private usuarioService: UsuariosService) { }
+  constructor(
+    private usuarioService: UsuariosService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {}
 
@@ -29,6 +33,8 @@ export class RegistroComponent implements OnInit {
     .subscribe(
       res => {
         console.log(res);
+        localStorage.setItem('token', res.token);
+        this.router.navigate(['/Inicio']);
       },
       err => console.log(err)
     )
