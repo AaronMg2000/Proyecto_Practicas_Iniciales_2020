@@ -39,7 +39,7 @@ class UsusarioController{
     public async update(req:Request, res:Response){
         const {id} = req.params;
         const usuario = await pool.query('UPDATE usuario set ? WHERE Carne = ?',[req.body,id]);
-        console.log(req.body    );
+        console.log(req.body);
         res.json({mensaje: 'El usuario con carne '+[id]+' fue actualizado con exito'});
     }
 

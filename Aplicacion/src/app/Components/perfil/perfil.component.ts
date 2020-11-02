@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/usuario';
 import {UsuariosService} from '../../services/usuarios.service';
 @Component({
   selector: 'app-perfil',
@@ -7,8 +8,15 @@ import {UsuariosService} from '../../services/usuarios.service';
 })
 export class PerfilComponent implements OnInit {
 
-  usuario: any = [];
-
+  usuario: Usuario = {
+    Carne: '',
+    Nombres: '',
+    Apellido: '',
+    Correo: '',
+    Password: '',
+    Confirmar: ''
+  };
+  password: any = '';
   constructor(public usuarioService: UsuariosService) { }
 
   ngOnInit(): void {
@@ -16,9 +24,24 @@ export class PerfilComponent implements OnInit {
     this.usuarioService.getUsuario(carne).subscribe(
       res => {
         this.usuario = res;
+        this.password = this.usuario.Password;
+        this.usuario.Password = '';
       },
       err => console.error(err)
     );
+  }
+
+  Actualizar(): any {
+    if (this.usuario.Password === ''){
+      this.usuario.Password = this.password;
+      console.log(this.usuario.Password);
+    }
+    this.usuarioService.update(this.usuario.Carne, this.usuario).subscribe(
+      res => {
+        console.log('Usuario Actualizado');
+      },
+      err => console.log(err)
+    )
   }
 
 }

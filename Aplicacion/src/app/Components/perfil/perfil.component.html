@@ -1,4 +1,63 @@
+
+
 <div id="app" class="wrapper">
+  <div class="modal fade" id="EditarDatos" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modificar Datos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <label for="Nombres">Nombres</label>
+                  <input type="text" name="Nombres" id="Nombres" [(ngModel)]="usuario.Nombres" class="form-control">
+                </div>
+              </div>
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <label for="Apellido">Apellidos</label>
+                  <input type="text" name="Apellido" id="Apellido" [(ngModel)]="usuario.Apellido" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="Nombres">Correo Electronico</label>
+              <input type="email" name="correo" id="correo" [(ngModel)]="usuario.Correo" class="form-control">
+            </div>
+            <div class="row">
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <label for="Nombres">Contraseña</label>
+                  <input type="password" name="password" id="password" [(ngModel)]="usuario.Password" class="form-control">
+                </div>
+              </div>
+              <div class="col col-md-6">
+                <div class="form-group">
+                  <label for="Apellido">Nueva Contraseña</label>
+                  <input type="password" name="nuevo" id="nuevo" [(ngModel)]="usuario.Confirmar" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-around">
+              <div class="col col-4">
+                <button class="btt btn-block btt-yellow redondear" (click)="Actualizar()" data-dismiss="modal">Actualizar</button>
+              </div>
+              <div class="col col-4">
+                <button class="btt btn-dark btn-block redondear" data-dismiss="modal">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <app-principal></app-principal>
   <div class="content-wrapper">
     <section class="p-2 container-fluid p-4">
@@ -9,24 +68,24 @@
               <div class="w-100">
                 <div class="row justify-content-around">
                   <div class="col col-md-2">
-                    <img src="assets/public/IMG/descarga.png" alt="" class="card-img-top">
+                    <img src="assets/public/IMG/FACING.png" alt="" class="card-img-top">
                   </div>
                   <div class="col col-12 col-md-9">
                     <div class="row h-100 align-content-around">
                       <div class="col col-12">
-                        <p class="w-100 h1">{{ usuario.Nombres }} {{ usuario.Apellido }}</p>
-                        <p class="w-100 h5">{{ usuario.Correo }}</p>
+                        <p class="w-100 display-4" style="font-family: ubuntu;">{{ usuario.Nombres }} {{ usuario.Apellido }}</p>
+                        <p class="w-100 h5" style="font-family: ubuntu;">{{ usuario.Correo }}</p>
                       </div>
                       <div class="col col-12 font-weight-bold">
                           <div class="row justify-content-around">
                             <div class="col col-md-4">
-                              <button class="btt-wave redondear btn-block">Modificar</button>
+                              <button class="btt btt-wave redondear btn-block" data-toggle="modal" data-target="#EditarDatos">Modificar</button>
                             </div>
                             <div class="col col-md-4">
-                              <button class="btt-ocean redondear btn-block">Pensum</button>
+                              <button class="btt btt-ocean redondear btn-block">Pensum</button>
                             </div>
                             <div class="col col-md-4">
-                              <button class="btt-deepAqua redondear btn-block">Cargar Cursos</button>
+                              <button class="btt btt-deepAqua redondear btn-block">Cargar Cursos</button>
                             </div>
                           </div>
                       </div>

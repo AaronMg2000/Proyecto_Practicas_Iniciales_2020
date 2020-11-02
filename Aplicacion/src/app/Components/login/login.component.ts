@@ -25,6 +25,10 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    const carne = this.usuarioService.getCarne();
+    if (carne != null){
+      this.router.navigate(['/Inicio']);
+    }
   }
 
   onLogin(): any{

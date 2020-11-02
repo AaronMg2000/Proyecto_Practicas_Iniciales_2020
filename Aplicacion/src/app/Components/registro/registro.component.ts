@@ -26,7 +26,12 @@ export class RegistroComponent implements OnInit {
     private router: Router
     ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const carne = this.usuarioService.getCarne();
+    if (carne != null){
+      this.router.navigate(['/Inicio']);
+    }
+  }
 
   comprobarUsuario(carne): any{
     this.usuarioService.getUsuario(carne).subscribe(
