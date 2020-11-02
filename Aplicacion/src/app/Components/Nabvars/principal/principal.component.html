@@ -30,8 +30,8 @@
     <div class="sidebar font-weight-bold">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item has-treeview">
-                    <a  class="text-white nav-link active" href="">
+                <li class="nav-item has-treeview {{ usuarioActive.isActive ? 'menu-open': '' }}">
+                      <a  class="text-white nav-link {{ usuarioActive.isActive ? 'active': '' }}" href="">
                         <i class="nav-icon fas fa-user text-white"></i>
                         <p>
                           Usuario
@@ -40,14 +40,14 @@
                       </a>
                       <ul class="nav nav-treeview" style='display:blook;'>
                         <li class="nav-item">
-                          <a routerLinkActive="active" [routerLink]="['/Perfil']" class="nav-link">
+                          <a routerLinkActive="active" #usuarioActive="routerLinkActive" [routerLink]="['/Perfil']" class="nav-link">
                             <i class="nav-icon fas fa-address-card">&#xe800;</i>
                             <p>Perfil</p>
                           </a>
                         </li>
 
                         <li class="nav-item">
-                          <a href="" class="nav-link active">
+                          <a class="nav-link" routerLinkActive="active" #usuarioActive="routerLinkActive" [routerLink]="['/Pensum/',usuario.Carne]">
                             <i class="nav-icon fas fa-map">&#xe812;</i>
                             <p>Pensum</p>
                           </a>

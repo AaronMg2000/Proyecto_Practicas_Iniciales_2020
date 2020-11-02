@@ -9,7 +9,6 @@ import {Router} from '@angular/router';
 export class PrincipalComponent implements OnInit {
 
   usuario: any = [];
-
   constructor(public usuarioService: UsuariosService) { }
 
   ngOnInit(): void {

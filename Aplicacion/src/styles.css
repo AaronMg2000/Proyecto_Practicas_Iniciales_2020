@@ -1,1 +1,69 @@
-/* You can add global styles to this file, and also import other style files */
+.btt-deepAqua {
+  color: #fff;
+  background-color: #003B46;
+  border-color: #003b46;
+}
+
+  .btt-deepAqua:hover {
+      color: #fff;
+      background-color: #075E6E;
+      border-color: #075E6E;
+  }
+
+  .btt-deepAqua:focus, .btn-n1.focus {
+      color: #fff;
+      background-color: #075E6E;
+      border-color: #075E6E;
+      box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+  }
+
+.btt-ocean {
+  color: #fff;
+  background-color: #07575B;
+  border-color: #07575B;
+}
+
+  .btt-ocean:hover {
+      color: #fff;
+      background-color: #007F86;
+      border-color: #007F86;
+  }
+
+  .btt-ocean:focus, .btn-n1.focus {
+      color: #fff;
+      background-color: #007F86;
+      border-color: #007F86;
+      box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+  }
+
+.btt-wave {
+  color: #fff;
+  background-color: #66A5AD;
+  border-color: #66A5AD;
+}
+
+  .btt-wave:hover {
+      color: #fff;
+      background-color: #7BCFDA;
+      border-color: #7BCFDA;
+  }
+
+  .btt-wave:focus, .btn-n1.focus {
+      color: #fff;
+      background-color: #7BCFDA;
+      border-color: #7BCFDA;
+      box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+  }
+
+.redondear{
+  border-radius: 20px;
+}
+
+.scroll {
+  max-height: 57vh;
+  overflow-y: auto;
+}
+
+.colorTabla{
+  background-color: #336E87;
+}
