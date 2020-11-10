@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'Login', component: LoginComponent},
   {path: 'Inicio', component: InicioComponent, canActivate: [AuthGuard]},
   {path: 'Registro', component: RegistroComponent},
-  {path: 'Pensum/:id', component: PensumComponent, canActivate: [AuthGuard]},
+  {path: 'Pensum', component: PensumComponent, canActivate: [AuthGuard]},
   {path: 'Usuario/:id', component: UsuarioComponent, canActivate: [AuthGuard]},
   {path: 'Restablecer', component: RestablecerComponent, canActivate: [AuthGuard]},
   {path: 'Publicacion/:id', component: PublicacionComponent, canActivate: [AuthGuard]},

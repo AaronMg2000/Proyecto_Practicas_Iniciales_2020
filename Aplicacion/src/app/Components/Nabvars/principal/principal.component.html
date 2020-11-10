@@ -30,8 +30,8 @@
     <div class="sidebar font-weight-bold">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item has-treeview {{ usuarioActive.isActive ? 'menu-open': '' }}">
-                      <a  class="text-white nav-link {{ usuarioActive.isActive ? 'active': '' }}" href="">
+                <li class="nav-item has-treeview {{ usuarioActive.isActive || usuarioActive2.isActive ? 'menu-open': '' }}">
+                      <a  class="text-white nav-link {{ usuarioActive.isActive || usuarioActive2.isActive ? 'active': '' }}" href="">
                         <i class="nav-icon fas fa-user text-white"></i>
                         <p>
                           Usuario
@@ -47,7 +47,7 @@
                         </li>
 
                         <li class="nav-item">
-                          <a class="nav-link" routerLinkActive="active" #usuarioActive="routerLinkActive" [routerLink]="['/Pensum/',usuario.Carne]">
+                          <a class="nav-link" routerLinkActive="active" #usuarioActive2="routerLinkActive" [routerLink]="['/Pensum']">
                             <i class="nav-icon fas fa-map">&#xe812;</i>
                             <p>Pensum</p>
                           </a>

@@ -124,8 +124,8 @@ fieldset:disabled a.btn {
 
 .btt-yellow {
   color: #fff;
-  background-color: #fbc02d;
-  border-color: #fbc02d;
+  background-color: #eca900fd;
+  border-color: #eca900fd;
 }
 
   .btt-yellow:hover {
@@ -138,5 +138,23 @@ fieldset:disabled a.btn {
       color: #fff;
       background-color: #FFD95C;
       border-color: #FFD95C;
+      box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+  }
+.btt-btn1 {
+  color: black;
+  background-color: #1de9b6;
+  border-color: #1de9b6;
+}
+
+  .btt-btn1:hover {
+      color: black;
+      background-color: #2cffca;
+      border-color: #2cffca;
+  }
+
+  .btt-btn1:focus, .btn-yellow.focus {
+      color: black;
+      background-color: #2cffca;
+      border-color: #2cffca;
       box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
   }
