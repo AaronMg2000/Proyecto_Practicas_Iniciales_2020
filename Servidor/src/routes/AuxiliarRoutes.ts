@@ -1,20 +1,16 @@
 import {Request, Response, Router} from 'express';
-import {usuarioController} from '../controllers/UsuarioController';
+import {auxiliarController} from '../controllers/AuxiliarController';
 const jwt = require('jsonwebtoken');
 
-class UsuarioRoutes{
+class AuxiliarRoutes{
     public router : Router = Router();
     
     constructor(){
         this.config();
     }
     config(): void{
-        this.router.get('/',usuarioController.list);
-        this.router.post('/',usuarioController.create);
-        this.router.delete('/:id',verifyToken,usuarioController.delete);
-        this.router.put('/:id',verifyToken,usuarioController.update);
-        this.router.get('/:id',usuarioController.get);
-        this.router.post('/Login',usuarioController.login);
+        this.router.get('/',verifyToken,auxiliarController.list);
+        this.router.get('/:id',verifyToken,auxiliarController.get);
         
     }
     
@@ -32,5 +28,5 @@ function verifyToken(req: any, res: any, next: any){
     req.userId = payload._id;
     next();
 }   
-const userRoutes = new UsuarioRoutes();
-export  default userRoutes.router;
+const auxiliarRoutes = new AuxiliarRoutes();
+export  default auxiliarRoutes.router;
