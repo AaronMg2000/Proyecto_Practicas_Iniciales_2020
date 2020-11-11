@@ -1,20 +1,15 @@
-<nav class="navbar fixed-bottom navbar-expand-sm navbar-dark text-center" style="background-color: rgba(0,0,0,.04);">
-    <p class="w-100 text-center">
-        <a href="webmaster@ing.usac.edu.gt" class="text-center w-100 text-dark">webmaster@ing.usac.edu.gt</a><br>
-        Facultad de Ingeniería USAC
-    </p>
-</nav>
+
 <div class="container-fluid">
-    <div class="row align-content-center justify-content-center" style="height: 95vh;">
-        <div class="col col-md-8 col-xl-3 mb-lg-3 mb-md-3">
-            <img class="img-fluid" src="assets/public/IMG/Login.png" alt="">
+    <div class="row align-content-center justify-content-center" style="height: 100vh">
+        <div class="col col-xl-3  mb-md-3">
+            <a href="/"><img class="img-fluid" src="assets/public/IMG/Login.png" alt=""></a>
         </div>
         <div class="w-100"></div>
         <div class="col col-md-6 col-lg-4">
             <p class="w-100 text-center h4 font-weight-normal">FORMULARIO DE REGISTRO</p>
         </div>
         <div class="w-100 mt-3"></div>
-        <div class="col col-md-7 col-lg-5 mb-5">
+        <div class="col col-lg-5 mb-3">
             <form ngNativeValidate action="/Registro" method="POST">
                 <div class="form-group">
                     <input type="text" id="Carne" name="Carne" (keyup)="comprobarUsuario(usuario.Carne)" [(ngModel)]="usuario.Carne" required class="form-control" style="font-size: 20px;" placeholder="CUI / REGISTRO ACADEMICO / REGISTRO PERSONAL  " #Carne="ngModel" minlength="9" maxlength="9">
@@ -63,7 +58,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password" name="password" [(ngModel)]="usuario.Password" class="form-control" required style="font-size: 20px;" placeholder="CONTRASEÑA" minlength="8" #password="ngModel" passwordValidation>
+                    <input type="password" id="password" name="password" [(ngModel)]="usuario.Password" class="form-control" required style="font-size: 20px;" placeholder="Contraseña" minlength="8" #password="ngModel" passwordValidation>
                     <div *ngIf="password.invalid && (password.dirty || password.touched) && password.value!=''" class="alert alert-danger">
                       <div *ngIf="password.errors.required">
                         La contraseña es requerida.
@@ -111,6 +106,11 @@
                 </div>
             </form>
         </div>
-        <div class="w-100 mb-5"></div>
     </div>
+    <nav class="navbar navbar-expand-sm navbar-dark text-center" style="background-color: rgba(0,0,0,.04);">
+      <p class="w-100 text-center">
+          <a href="webmaster@ing.usac.edu.gt" class="text-center w-100 text-dark">webmaster@ing.usac.edu.gt</a><br>
+          Facultad de Ingeniería USAC
+      </p>
+  </nav>
 </div>
