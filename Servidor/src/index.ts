@@ -1,10 +1,19 @@
 import expres, {Application, Request, Response} from 'express';
 import IndexRoutes from './routes/IndexRoutes';
 import UsuarioRoutes from './routes/UsuarioRoutes';
+import AuxiliarRoutes from './routes/AuxiliarRoutes';
+import ComentarioRoutes from './routes/ComentarioRoutes';
+import PensumRoutes from './routes/PensumRoutes';
+import CursoRoutes from './routes/CursoRoutes';
+import CursosAprobadosRoutes from './routes/CursosAprobadosRoutes';
+import PublicacionRoutes from './routes/PublicacionRoutes';
+import CatedraticoRoutes from './routes/CatedraticoRoutes';
+
 import morgan from 'morgan';
 const jwt = require('jsonwebtoken');
 const session =  require ('express-session');
 import cors from 'cors';
+import { cursoAprobadoController } from './controllers/CursoAprobadoController';
 class Server{
     public app: Application;
     constructor(){
@@ -23,6 +32,14 @@ class Server{
     routes(): void{
         this.app.use(IndexRoutes);
         this.app.use('/Usuarios',UsuarioRoutes);
+        this.app.use('/Catedratico',CatedraticoRoutes);
+        this.app.use('/Auxiliar',AuxiliarRoutes);
+        this.app.use('/Comentario',ComentarioRoutes);
+        this.app.use('/Publicacion',PublicacionRoutes);
+        this.app.use('/Curso',CursoRoutes);
+        this.app.use('/CursoA',CursosAprobadosRoutes);
+        this.app.use('/CursoCatedratico',UsuarioRoutes);
+        this.app.use('/Pensum',PensumRoutes);
     }
     start(): void{
         this.app.listen(this.app.get('port'),()=>{
