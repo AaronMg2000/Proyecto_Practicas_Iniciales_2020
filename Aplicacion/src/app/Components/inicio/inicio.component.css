@@ -1,0 +1,40 @@
+/* CSS Tarjeta de publicacion */
+.card {
+  border-left: 8px solid #fd7e14;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+i {
+  color: #888888;
+}
+
+/* FIN CSS Tarjeta de publicacion */
+
+/* CSS Comentario unico */
+.comentario{
+    font-size: 14px;
+}
+.logo-user-container {
+  width: 100px;
+}
+
+.logo-user {
+  border-radius: 50%;
+  background-color: brown;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 1.4rem;
+  color: #fff;
+  text-align: center;
+}
+
+/* CSS Comentario unico */
