@@ -19,7 +19,7 @@ class CursoAprobadoController {
     getList(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const cursosA = yield database_1.default.query('select CodigoCurso, Nombre, Creditos, Semestre, NotaAprobada from cursosaprobados t1 INNER JOIN pensum t2 ON t1.CarnetU = ? and t1.CursoP = t2.IdCursoPensum INNER JOIN curso t3 ON t2.Curso_CodigoCurso = t3.CodigoCurso', [id]);
+            const cursosA = yield database_1.default.query('select IdCursoPensum,CodigoCurso, Nombre, Creditos, Semestre, NotaAprobada from cursosaprobados t1 INNER JOIN pensum t2 ON t1.CarnetU = ? and t1.CursoP = t2.IdCursoPensum INNER JOIN curso t3 ON t2.Curso_CodigoCurso = t3.CodigoCurso', [id]);
             res.json(cursosA);
         });
     }
@@ -27,10 +27,10 @@ class CursoAprobadoController {
         return __awaiter(this, void 0, void 0, function* () {
             var NuevoCursoA = {
                 CarnetU: req.body.CarnetU,
-                CursosP: req.body.CursosP,
+                CursoP: req.body.CursoP,
                 NotaAprobada: req.body.NotaAprobada
             };
-            yield database_1.default.query('INSERT INTO comentario set ?', [NuevoCursoA]);
+            yield database_1.default.query('INSERT INTO cursosaprobados set ?', [NuevoCursoA]);
             res.status(200).json(NuevoCursoA);
         });
     }

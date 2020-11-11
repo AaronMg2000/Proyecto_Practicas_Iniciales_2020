@@ -37,7 +37,7 @@ class CodigoCurso {
     listSelect(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const Cursos = yield database_1.default.query('select CodigoCurso, Nombre from cursosaprobados t1 INNER JOIN pensum t2 ON t1.CarnetU = ? and t1.CursoP != t2.IdCursoPensum INNER JOIN curso t3 ON t2.Curso_CodigoCurso = t3.CodigoCurso', [id]);
+            const Cursos = yield database_1.default.query('select IdCursoPensum,CodigoCurso, Nombre from pensum t1 INNER JOIN curso t3 ON t1.Curso_CodigoCurso = t3.CodigoCurso where t1.IdCursoPensum NOT IN (select CursoP from cursosaprobados where CarnetU = ?)', [id]);
             res.json(Cursos);
         });
     }
