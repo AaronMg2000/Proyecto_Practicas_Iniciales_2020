@@ -25,7 +25,7 @@ class CodigoCurso{
 
     public async listSelect(req:Request, res:Response){
         const {id} = req.params;
-        const Cursos = await pool.query('select CodigoCurso, Nombre from cursosaprobados t1 INNER JOIN pensum t2 ON t1.CarnetU = ? and t1.CursoP != t2.IdCursoPensum INNER JOIN curso t3 ON t2.Curso_CodigoCurso = t3.CodigoCurso',[id]);
+        const Cursos = await pool.query('select IdCursoPensum,CodigoCurso, Nombre from pensum t1 INNER JOIN curso t3 ON t1.Curso_CodigoCurso = t3.CodigoCurso where t1.IdCursoPensum NOT IN (select CursoP from cursosaprobados where CarnetU = ?)',[id]);
         res.json(Cursos);
     }
 

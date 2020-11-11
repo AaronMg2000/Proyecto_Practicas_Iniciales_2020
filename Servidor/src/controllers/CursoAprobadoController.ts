@@ -6,17 +6,17 @@ class CursoAprobadoController{
 
      public async getList(req: Request, res: Response){
          const {id} = req.params;
-         const cursosA = await pool.query('select CodigoCurso, Nombre, Creditos, Semestre, NotaAprobada from cursosaprobados t1 INNER JOIN pensum t2 ON t1.CarnetU = ? and t1.CursoP = t2.IdCursoPensum INNER JOIN curso t3 ON t2.Curso_CodigoCurso = t3.CodigoCurso',[id]);
+         const cursosA = await pool.query('select IdCursoPensum,CodigoCurso, Nombre, Creditos, Semestre, NotaAprobada from cursosaprobados t1 INNER JOIN pensum t2 ON t1.CarnetU = ? and t1.CursoP = t2.IdCursoPensum INNER JOIN curso t3 ON t2.Curso_CodigoCurso = t3.CodigoCurso',[id]);
          res.json(cursosA);
      }
      
      public async create (req: Request, res: Response){
          var NuevoCursoA={
              CarnetU: req.body.CarnetU,
-             CursosP: req.body.CursosP,
+             CursoP: req.body.CursoP,
              NotaAprobada: req.body.NotaAprobada
          };
-         await pool.query('INSERT INTO comentario set ?',[NuevoCursoA]);
+         await pool.query('INSERT INTO cursosaprobados set ?',[NuevoCursoA]);
          res.status(200).json(NuevoCursoA);
      }
  

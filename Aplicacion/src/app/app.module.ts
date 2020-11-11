@@ -19,6 +19,8 @@ import {FormsModule} from '@angular/forms';
 import {AuthGuard} from './auth.guard';
 import {TokenInterceptorService} from './services/token-interceptor.service';
 import { PasswordValidationDirective } from './validations/password-validation.directive';
+import { NgSelect2Module } from 'ng-select2';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +38,7 @@ import { PasswordValidationDirective } from './validations/password-validation.d
   ],
   imports: [
     BrowserModule,
+    NgSelect2Module,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

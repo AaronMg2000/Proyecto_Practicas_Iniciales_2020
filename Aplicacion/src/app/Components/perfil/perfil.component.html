@@ -61,7 +61,7 @@
     <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header text-white" style="background-color: #0086c3;">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modificar Datos</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Agregar Curso</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -73,20 +73,24 @@
               <div class="row">
                 <div class="col col-8">
                   <label for="">Curso</label>
-                  <select name="" id="" class="form-control">
-                    <option value="">Curso1</option>
+                  <select required name="CursoP" id="CursoP" value='' select2 [(ngModel)]="cursoAP.CursoP" class="form-control" style="width: 100%;">
+                    <option value="">Seleccionar</option>
+                    <option value="{{ curso.IdCursoPensum }}" *ngFor="let curso of cursos">{{ curso.CodigoCurso }} | {{ curso.Nombre }}</option>
                   </select>
+
+
                 </div>
                 <div class="col col-4">
                   <label for="">Nota</label>
-                  <input type="text" class="form-control">
+                  <input type="text" name="NotaAprobada" [(ngModel)]="cursoAP.NotaAprobada" id="NotaAprobada" class="form-control">
                 </div>
               </div>
             </div>
 
             <div class="modal-footer">
               <div class="col col-2">
-                <button class="btt btn-block btt-btn1 redondear text-white" (click)="Actualizar()" data-dismiss="modal">Actualizar</button>
+                <button *ngIf="cursoAP.NotaAprobada>=61 && cursoAP.NotaAprobada<=100 && (cursoAP.CursoP != 0 || cursoAP.CursoP!=null)" class="btt btn-block btt-btn1 redondear text-white"   (click)="AgregarCursoA()" data-dismiss="modal">Registrar</button>
+                <button *ngIf="cursoAP.NotaAprobada<61 || cursoAP.NotaAprobada>100" disabled class="btt btn-block btt-btn1 redondear text-white"   (click)="AgregarCursoA()" data-dismiss="modal">Registrar</button>
               </div>
               <div class="col col-2">
                 <button class="btt btn-dark btn-block redondear" data-dismiss="modal">Cancelar</button>
@@ -112,7 +116,7 @@
                   <div class="col col-12 col-md-9">
                     <div class="row h-100 align-content-around">
                       <div class="col col-12">
-                        <p class="w-100 display-4" style="font-family: ubuntu;">{{ usuario.Nombres }} {{ usuario.Apellido }}</p>
+                        <p class="w-100 h1" style="font-family: ubuntu;">{{ usuario.Nombres }} {{ usuario.Apellido }}</p>
                         <p class="w-100 h5" style="font-family: ubuntu;">{{ usuario.Correo }}</p>
                       </div>
                       <div class="col col-12 font-weight-bold">
@@ -140,27 +144,30 @@
             <div class="card-body">
               <div class="w-100 text-center">
                 <p class="w-100 h4">Creditos</p>
-                <p class="display-3">80</p>
+                <p class="display-3">{{ creditos }}</p>
               </div>
             </div>
           </div>
         </div>
         <div class="col col-12 mt-4" style="max-height: 57vh;">
           <div class="card h-100 scroll" style="border-radius: 10px;">
-            <div class="card-body">
-              <table datatable  class="table table-bordered" style="width:100%">
+            <div class="card-body" id="DivTable">
+              <table id="TablaCurso" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="TablaCursos" class="table table-bordered" style="width:100%">
                 <thead class="colorTabla text-white font-weight-bold">
                     <tr>
                         <th class="text-center">Codigo</th>
                         <th>Nombre del curso</th>
                         <th class="text-center">Nota</th>
+                        <th class="text-center">Creditos</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="text-center">101</td>
-                    <td>Matematica Basica 1</td>
-                    <td class="text-center">88</td>
+                  <tr *ngFor="let curso of cursosAprobados">
+                    <td class="text-center">{{ curso.CodigoCurso }}</td>
+                    <td>{{ curso.Nombre }}</td>
+                    <td class="text-center">{{ curso.NotaAprobada }}</td>
+                    <td class="text-center">{{ curso.Creditos }}</td>
                   </tr>
                 </tbody>
               </table>

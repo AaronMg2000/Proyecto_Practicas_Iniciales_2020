@@ -12,7 +12,6 @@ class CursoRoutes{
         this.router.get('/',verifyToken,codigoCurso.list);
         this.router.get('/:id',verifyToken,codigoCurso.get);
         this.router.get('/Lista/:id',verifyToken,codigoCurso.listSelect);
-        
     }
     
 }
