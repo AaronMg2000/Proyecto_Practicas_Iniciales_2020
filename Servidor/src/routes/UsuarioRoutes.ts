@@ -12,7 +12,7 @@ class UsuarioRoutes{
         this.router.get('/',usuarioController.list);
         this.router.post('/',usuarioController.create);
         this.router.delete('/:id',verifyToken,usuarioController.delete);
-        this.router.put('/:id',verifyToken,usuarioController.update);
+        this.router.put('/:id',usuarioController.update);
         this.router.get('/:id',usuarioController.get);
         this.router.post('/Login',usuarioController.login);
         

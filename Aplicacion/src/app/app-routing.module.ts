@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'Registro', component: RegistroComponent},
   {path: 'Pensum', component: PensumComponent, canActivate: [AuthGuard]},
   {path: 'Usuario/:id', component: UsuarioComponent, canActivate: [AuthGuard]},
-  {path: 'Restablecer', component: RestablecerComponent, canActivate: [AuthGuard]},
+  {path: 'Restablecer', component: RestablecerComponent},
   {path: 'Publicacion/:id', component: PublicacionComponent, canActivate: [AuthGuard]},
   {path: 'Perfil', component: PerfilComponent, canActivate: [AuthGuard]},
   {path: '**', component: Page404Component}

@@ -1,1 +1,102 @@
-<p>restablecer works!</p>
+<div class="modal fade" id="CambiarContraseña" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #0086c3;">
+        <h5 class="modal-title" id="exampleModalLongTitle">Agregar Curso</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <div class="form-group">
+              <input type="password" id="password" name="password" [(ngModel)]="usuario.Password" class="form-control" required style="font-size: 20px;" placeholder="Contraseña" minlength="8" #password="ngModel" passwordValidation>
+              <div *ngIf="password.invalid && (password.dirty || password.touched) && password.value!=''" class="alert alert-danger">
+                <div *ngIf="password.errors.required">
+                  La contraseña es requerida.
+                </div>
+                <div *ngIf="password.errors.minlength">
+                  La longitud de la contraseña debe ser mayor o igual a 8.
+                </div>
+                <div *ngIf="password.errors.passwordValidation">
+                  {{ password.errors.passwordValidation.message }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+                <input type="password" id="repassword" name="repassword" [(ngModel)]="usuario.Confirmar" class="form-control" required style="font-size: 20px;" placeholder="Repetir Contraseña" minlength="8" #repassword="ngModel" passwordValidation>
+                <div *ngIf="((repassword.invalid && (repassword.dirty || repassword.touched))) && repassword.value!=''" class="alert alert-danger">
+                  <div *ngIf="repassword.errors.required">
+                    La contraseña es requerida.
+                  </div>
+                  <div *ngIf="repassword.errors.minlength">
+                    La longitud de la contraseña debe ser mayor o igual a 8.
+                  </div>
+                  <div *ngIf="repassword.errors.passwordValidation">
+                    {{ repassword.errors.passwordValidation.message }}
+                  </div>
+                  <div *ngIf="usuario.Password!='' && usuario.Confirmar!=''">
+                      <p class="{{ usuario.Password=='' && usuario.Confirmar=='' ? 'd-none': usuario.Password!='' && usuario.Confirmar!='' && usuario.Password!=usuario.Confirmar ? 'd-inline': 'd-none' }}">Las contraseñas no coinciden</p>
+                  </div>
+                </div>
+                <div *ngIf="repassword.valid && (repassword.dirty || repassword.touched) && usuario.Password!= usuario.Confirmar" class="alert alert-danger">
+                  <div *ngIf="usuario.Password!='' && usuario.Confirmar!=''">
+                    <p class="{{ usuario.Password=='' && usuario.Confirmar=='' ? 'd-none': usuario.Password!='' && usuario.Confirmar!='' && usuario.Password!=usuario.Confirmar ? 'd-inline': 'd-none' }}">Las contraseñas no coinciden</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <div class="col col-2">
+              <button class="btn btn-block btn-primary {{ password.errors || !reg || usuario.Password!= usuario.Confirmar || repassword.errors  ? '': 'd-none' }}" disabled>Registrar</button>
+              <button class="btn btn-block btn-primary {{ password.errors || !reg || usuario.Password!= usuario.Confirmar || repassword.errors  ? 'd-none': '' }}"(click)="ActualizarUsuario()">Registrar</button>
+            </div>
+            <div class="col col-2">
+              <button class="btt btn-dark btn-block redondear" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="background-color: #f7f7f7;">
+  <div class="row align-content-center justify-content-center" style="height: 100vh;">
+      <div class="col col-md-8 col-xl-3 mb-lg-5 mb-md-5">
+          <img class="img-fluid" src="assets/public/IMG/Login.png" alt="">
+      </div>
+      <div class="w-100 mt-md-5"></div>
+      <div class="col col-md-6 col-lg-4">
+          <p class="w-100 text-center h4 font-weight-normal">INICIAR SESIÓN INGENIERIA USAC</p>
+      </div>
+      <div class="w-100 mt-3"></div>
+      <div class="col col-md-7 col-lg-5">
+          <form action="/login" ngNativeValidate method="post">
+              <div *ngIf='mostrar && error' class="form-group">
+                <div class="alert alert-danger">
+                  {{ error }}
+                </div>
+              </div>
+              <div class="form-group">
+                  <input type="text" [(ngModel)]="usuario.Carne" id="Carne" required name="Carne" class="form-control" style="font-size: 20px;" placeholder="CUI / REGISTRO ACADEMICO / REGISTRO PERSONAL">
+              </div>
+              <div class="form-group">
+                  <input type="email" id="Correo" [(ngModel)]="usuario.Correo" required name="Correo" class="form-control" style="font-size: 20px;" placeholder="CORREO ELECTRONICO">
+              </div>
+              <div class="form-group">
+                  <button class="btn btn-block btn-secondary p-2 btn-grow" (click)="ConfirmarDatos()">VERIFICAR DATOS</button>
+                  <a class="btn btn-block btn-secondary p-2 btn-grow" href="/Login" style="background-color: #ff922b;">CANCELAR</a>
+              </div>
+          </form>
+      </div>
+  </div>
+  <nav class="navbar navbar-expand-sm navbar-dark text-center" style="background-color: rgba(0,0,0,.04);">
+      <p class="w-100 text-center pt-2">
+          <a href="webmaster@ing.usac.edu.gt" class="text-center w-100 text-dark">webmaster@ing.usac.edu.gt</a><br>
+          Facultad de Ingeniería USAC
+      </p>
+  </nav>
+</div>

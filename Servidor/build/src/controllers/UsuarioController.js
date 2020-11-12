@@ -58,9 +58,32 @@ class UsusarioController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const usuario = yield database_1.default.query('UPDATE usuario set ? WHERE Carne = ?', [req.body, id]);
-            console.log(req.body);
-            res.json({ mensaje: 'El usuario con carne ' + [id] + ' fue actualizado con exito' });
+            const confirm = req.body.Confirmar;
+            if (confirm == undefined) {
+                const usuario = yield database_1.default.query('UPDATE usuario set ? WHERE Carne = ?', [req.body, id]);
+                console.log(req.body);
+                res.json({ mensaje: 'El usuario con carne ' + [id] + ' fue actualizado con exito' });
+            }
+            else {
+                bcryptjs_1.default.genSalt(10, function (err, salt) {
+                    return __awaiter(this, void 0, void 0, function* () {
+                        bcryptjs_1.default.hash(req.body.Password, salt, function (err, hash) {
+                            return __awaiter(this, void 0, void 0, function* () {
+                                var NuevoUsuario = {
+                                    Carne: req.body.Carne,
+                                    Nombres: req.body.Nombres,
+                                    Apellido: req.body.Apellido,
+                                    Password: hash,
+                                    Correo: req.body.Correo
+                                };
+                                const usuario = yield database_1.default.query('UPDATE usuario set ? WHERE Carne = ?', [NuevoUsuario, id]);
+                                console.log(req.body);
+                                res.json({ mensaje: 'El usuario con carne ' + [id] + ' fue actualizado con exito' });
+                            });
+                        });
+                    });
+                });
+            }
         });
     }
     get(req, res) {

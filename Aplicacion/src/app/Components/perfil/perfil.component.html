@@ -32,20 +32,56 @@
             <div class="row">
               <div class="col col-md-6">
                 <div class="form-group">
-                  <label for="Nombres">Contraseña</label>
-                  <input type="password" name="password" id="password" [(ngModel)]="usuario.Password" class="form-control">
+                  <label for="Apellido">Nueva Contraseña</label>
+                  <input type="password" id="password" name="password" [(ngModel)]="usuario.Password" class="form-control" required style="font-size: 20px;" placeholder="Contraseña" minlength="8" #password="ngModel" passwordValidation>
+                  <div *ngIf="password.invalid && (password.dirty || password.touched) && password.value!=''" class="alert alert-danger">
+                    <div *ngIf="password.errors.required">
+                      La contraseña es requerida.
+                    </div>
+                    <div *ngIf="password.errors.minlength">
+                      La longitud de la contraseña debe ser mayor o igual a 8.
+                    </div>
+                    <div *ngIf="password.errors.passwordValidation">
+                      {{ password.errors.passwordValidation.message }}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col col-md-6">
                 <div class="form-group">
-                  <label for="Apellido">Nueva Contraseña</label>
-                  <input type="password" name="nuevo" id="nuevo" [(ngModel)]="usuario.Confirmar" class="form-control">
+                  <label for="Apellido">Confirmar Contraseña</label>
+                  <input type="password" id="repassword" name="repassword" [(ngModel)]="usuario.Confirmar" class="form-control" required style="font-size: 20px;" placeholder="Repetir Contraseña" minlength="8" #repassword="ngModel" passwordValidation>
+                  <div *ngIf="((repassword.invalid && (repassword.dirty || repassword.touched))) && repassword.value!=''" class="alert alert-danger">
+                    <div *ngIf="repassword.errors.required">
+                      La contraseña es requerida.
+                    </div>
+                    <div *ngIf="repassword.errors.minlength">
+                      La longitud de la contraseña debe ser mayor o igual a 8.
+                    </div>
+                    <div *ngIf="repassword.errors.passwordValidation">
+                      {{ repassword.errors.passwordValidation.message }}
+                    </div>
+                    <div *ngIf="usuario.Password!='' && usuario.Confirmar!=''">
+                        <p class="{{ usuario.Password=='' && usuario.Confirmar=='' ? 'd-none': usuario.Password!='' && usuario.Confirmar!='' && usuario.Password!=usuario.Confirmar ? 'd-inline': 'd-none' }}">Las contraseñas no coinciden</p>
+                    </div>
+                  </div>
+                  <div *ngIf="repassword.valid && (repassword.dirty || repassword.touched) && usuario.Password!= usuario.Confirmar" class="alert alert-danger">
+                    <div *ngIf="usuario.Password!='' && usuario.Confirmar!=''">
+                      <p class="{{ usuario.Password=='' && usuario.Confirmar=='' ? 'd-none': usuario.Password!='' && usuario.Confirmar!='' && usuario.Password!=usuario.Confirmar ? 'd-inline': 'd-none' }}">Las contraseñas no coinciden</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="row justify-content-around">
               <div class="col col-4">
-                <button class="btt btn-block btt-btn1 redondear" (click)="Actualizar()" data-dismiss="modal">Actualizar</button>
+                <div *ngIf="usuario.Password!='' || usuario.Confirmar!=''">
+                  <button class="btt btn-block btt-btn1 redondear {{ password.errors  || usuario.Password!= usuario.Confirmar || repassword.errors  ? '': 'd-none' }}" disabled>Registrar</button>
+                  <button class="btt btn-block btt-btn1 redondear {{ password.errors  || usuario.Password!= usuario.Confirmar || repassword.errors  ? 'd-none': '' }}" (click)="Actualizar()" data-dismiss="modal">Registrar</button>
+                </div>
+                <div *ngIf="usuario.Confirmar=='' && usuario.Password==''">
+                  <button class="btt btn-block btt-btn1 redondear" (click)="Actualizar()"data-dismiss="modal" >Registrar</button>
+                </div>
               </div>
               <div class="col col-4">
                 <button class="btt btn-dark btn-block redondear" data-dismiss="modal">Cancelar</button>

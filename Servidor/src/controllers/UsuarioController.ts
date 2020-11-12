@@ -38,9 +38,29 @@ class UsusarioController{
 
     public async update(req:Request, res:Response){
         const {id} = req.params;
-        const usuario = await pool.query('UPDATE usuario set ? WHERE Carne = ?',[req.body,id]);
-        console.log(req.body);
-        res.json({mensaje: 'El usuario con carne '+[id]+' fue actualizado con exito'});
+        const confirm = req.body.Confirmar;
+        if (confirm == undefined){
+            const usuario = await pool.query('UPDATE usuario set ? WHERE Carne = ?',[req.body,id]);
+            console.log(req.body);
+            res.json({mensaje: 'El usuario con carne '+[id]+' fue actualizado con exito'});
+        }else{
+            bycrypt.genSalt(10, async function(err,salt){
+                bycrypt.hash(req.body.Password,salt, async function(err,hash){
+                    var NuevoUsuario={
+                        Carne: req.body.Carne,
+                        Nombres: req.body.Nombres,
+                        Apellido: req.body.Apellido,
+                        Password: hash,
+                        Correo: req.body.Correo
+                    };
+                    const usuario = await pool.query('UPDATE usuario set ? WHERE Carne = ?',[NuevoUsuario,id]);
+                    console.log(req.body);
+                    res.json({mensaje: 'El usuario con carne '+[id]+' fue actualizado con exito'});
+                });
+            });
+        }
+        
+        
     }
 
     public async get(req:Request, res:Response){

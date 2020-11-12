@@ -55,6 +55,6 @@ export class RegistroComponent implements OnInit {
         this.router.navigate(['/Inicio']);
       },
       err => console.log(err)
-    )
+    );
   }
 }

@@ -81,6 +81,7 @@ export class PerfilComponent implements OnDestroy, OnInit {
         this.usuario = res;
         this.password = this.usuario.Password;
         this.usuario.Password = '';
+        this.usuario.Confirmar = '';
       },
       err => console.error(err)
     );
@@ -89,14 +90,16 @@ export class PerfilComponent implements OnDestroy, OnInit {
   Actualizar(): any {
     if (this.usuario.Password === ''){
       this.usuario.Password = this.password;
-      console.log(this.usuario.Password);
     }
     this.usuarioService.update(this.usuario.Carne, this.usuario).subscribe(
       res => {
         console.log('Usuario Actualizado');
+        alertify.success('Usuario actualizado con exito');
+        this.usuario.Password = '';
+        this.usuario.Confirmar = '';
       },
-      err => console.log(err)
-    )
+      err => {console.log(err); alertify.success('Error al actualizar el usuario'); }
+    );
   }
 
   AgregarCursoA(): any {
