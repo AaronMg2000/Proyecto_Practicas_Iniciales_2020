@@ -32,6 +32,7 @@ export class InicioComponent implements OnInit {
       Confirmar: ''
     };
 
+    comentar: any = false;
     auxiliar: Auxiliar = {
       NoAuxiliar: 0,
       Nombres: '',
@@ -66,11 +67,11 @@ export class InicioComponent implements OnInit {
       curso: this.curso
     };
 
-    comenario: Comentario = {
+    comentario: Comentario = {
       idComentario: null,
       Mensaje: '',
       Publicacion_id: 0,
-      Usuario_Carnet: 0,
+      Usuario_Carnet: '',
       usuario: this.usuario,
       iniciales: ''
     };
@@ -207,8 +208,12 @@ export class InicioComponent implements OnInit {
       });
     });
   }
-  MostrarComentarios(comentarios: Comentario[]): void{
+  MostrarComentarios(comentarios: Comentario[], publi: Publicacion, com: any): void{
     this.comentarios = comentarios;
+    this.comentar = com;
+    this.publicacion = publi;
+    this.comentario.Usuario_Carnet = this.usuario.Carne;
+    this.comentario.Publicacion_id = this.publicacion.idPublicacion;
     this.comentarios.forEach(element => {
       this.usuarioService.getUsuario(element.Usuario_Carnet.toString()).subscribe(
         res => {
@@ -220,5 +225,39 @@ export class InicioComponent implements OnInit {
         err => console.error(err)
       );
     });
+  }
+  registrarComentario(): void{
+    this.comentarioService.registrar(this.comentario).subscribe(
+      res => {
+        console.log(res);
+        this.comentario.Mensaje = '';
+        this.actualizarPublicacion();
+      },
+      err => console.error(err)
+    );
+  }
+
+  actualizarPublicacion(): void{
+    this.comentarioService.getComentariosP(this.publicacion.idPublicacion).subscribe(
+      res => {
+        this.publicacion.Comentarios = res;
+        this.MostrarComentarios(this.publicacion.Comentarios, this.publicacion, true);
+      },
+      err => console.error(err)
+    );
+
+    this.publicacionService.getPublicaciones().subscribe(
+      res => {
+        this.publicaciones = res;
+        this.obtenerUsuario();
+        this.obtenerAuxiliar();
+        this.obtenerCurso();
+        this.obtenerCatedratico();
+        this.obtenerCursoCatedratico();
+        this.CrearComentarios();
+        console.log(this.publicaciones);
+      },
+      err => console.error(err)
+    );
   }
 }

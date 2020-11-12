@@ -5,13 +5,13 @@ class PublicacionController{
     
 
     public async list (req: Request, res: Response){
-       const usuarios = await pool.query('select * from publicacion');
+       const usuarios = await pool.query('select * from publicacion ORDER BY idPublicacion desc');
        res.json(usuarios);
     }
     
     public async getList(req: Request, res: Response){
         const {id} = req.params;
-        const comentarios = await pool.query('select * from publicacion where idPublicacion = ?',[id]);
+        const comentarios = await pool.query('select * from publicacion where idPublicacion = ? ORDER BY idPublicacion desc',[id]);
         res.json(comentarios);
     }
 

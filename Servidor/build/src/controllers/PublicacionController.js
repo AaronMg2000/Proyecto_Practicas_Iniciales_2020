@@ -18,14 +18,14 @@ const jwt = require('jsonwebtoken');
 class PublicacionController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const usuarios = yield database_1.default.query('select * from publicacion');
+            const usuarios = yield database_1.default.query('select * from publicacion ORDER BY idPublicacion desc');
             res.json(usuarios);
         });
     }
     getList(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const comentarios = yield database_1.default.query('select * from publicacion where idPublicacion = ?', [id]);
+            const comentarios = yield database_1.default.query('select * from publicacion where idPublicacion = ? ORDER BY idPublicacion desc', [id]);
             res.json(comentarios);
         });
     }

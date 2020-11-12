@@ -21,9 +21,9 @@
           <p class="comentario-publicacion"><i class="fas fa-quote-left"></i>{{ publi.Mensaje }}</p>
           <hr>
           <div class="botones-publicacion">
-            <a  class="ver-comentarios mr-2 p-1" (click)="MostrarComentarios(publi.Comentarios)" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+            <a href="#" class="ver-comentarios mr-2 p-1" (click)="MostrarComentarios(publi.Comentarios, publi,false)" data-toggle="modal" data-target=".bd-example-modal-lg"><i
                 class="far fa-comment-alt"></i> Ver {{ publi.NComentarios }} comentarios</a>
-            <a href="#" class="comentar mr-2 p-1"><i class="far fa-edit"></i> Comentar</a>
+            <a href="#" class="comentar mr-2 p-1" (click)="MostrarComentarios(publi.Comentarios, publi,true)" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="far fa-edit"></i> Comentar</a>
             <a href="#" class="ver-perfil mr-2 p-1"><i class="far fa-user"></i> Ver perfil</a>
           </div>
         </div>
@@ -31,15 +31,21 @@
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
           aria-hidden="true">
           <div class="modal-dialog modal-lg">
-            <div class="modal-content bg-primary" >
-              <div class="comentarios-titulo p-3 d-flex flex-row justify-content-between">
+            <div class="modal-content" >
+              <div class="comentarios-titulo p-3 d-flex bg-primary flex-row justify-content-between">
                 <h4><i class="far fa-comment-alt mr-1 text-white"></i> Comentarios</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
                 </button>
               </div>
               <!-- Comentario -->
-              <div class="bg-white scroll p-2" style="max-height: 82vh;">
+              <div class="form-group p-2 bg-light" *ngIf="comentar">
+                <label for="">Comentario</label>
+                <input type="text" [(ngModel)]="comentario.Mensaje" class="form-control">
+                <button class="btn btn-success btn-block mt-2" (click)="registrarComentario()">Comentar</button>
+              </div>
+              <div class="bg-white scroll p-2 {{ comentar ? 'vh65': 'vh83' }}">
+
                 <div *ngFor="let comen of comentarios" class="comentario bg-light d-flex align-items-center p-1 pl-2" style="border-bottom:2px solid black;">
                   <!--Iniciales-->
                   <div class="logo-user-container d-flex mt-3 align-self-start">

@@ -5,22 +5,21 @@ class ComentarioController{
     
 
     public async list (req: Request, res: Response){
-       const usuarios = await pool.query('select * from comentario');
+       const usuarios = await pool.query('select * from comentario ORDER BY idComentario desc');
        res.json(usuarios);
     }
     
     public async getList(req: Request, res: Response){
         const {id} = req.params;
-        const comentarios = await pool.query('select * from comentario where Publicacion_id = ?',[id]);
+        const comentarios = await pool.query('select * from comentario where Publicacion_id = ? ORDER BY idComentario desc',[id]);
         res.json(comentarios);
     }
 
     public async create (req: Request, res: Response){
         var NuevoComentario={
-            idComentario: req.body.idComentario,
             Mensaje: req.body.Mensaje,
             Publicacion_id: req.body.Publicacion_id,
-            Usuario_Carne: req.body.Usuario_Carne
+            Usuario_Carnet: req.body.Usuario_Carnet
         };
         await pool.query('INSERT INTO comentario set ?',[NuevoComentario]);
         res.status(200).json(NuevoComentario);
