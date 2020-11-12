@@ -48,7 +48,7 @@ class PublicacionController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const usuario = yield database_1.default.query('DELETE FROM publicacion WHERE idPubliacacion = ?', [id]);
+            const usuario = yield database_1.default.query('DELETE FROM publicacion WHERE idPublicacion = ?', [id]);
             console.log(req.body);
             res.json({ mensaje: 'La publicacion fue eliminada con exito' });
         });

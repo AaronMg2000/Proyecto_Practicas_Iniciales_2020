@@ -10,7 +10,7 @@
           <div class="d-flex justify-content-between">
             <h5 class="pt-1 pb-1 text-black"><i class="fas fa-user-friends"></i> {{ publi.Usuario.Nombres }} {{ publi.Usuario.Apellido }} </h5>
             <!-- Boton eliminar :v -->
-            <button class="pt-1 mb-2" style="background: none;border: none;"><i class="fas fa-trash-alt"
+            <button *ngIf="publi.Usuario_Carnet.toString() == usuario.Carne" class="pt-1 mb-2" (click)="MostrarMensaje(publi.idPublicacion)" style="background: none;border: none;"><i class="fas fa-trash-alt"
                 style="font-size: large;"></i></button>
           </div>
           <hr class="mt-0 mb-2">
@@ -56,6 +56,8 @@
                     <div class="titulo-comentario d-flex flex-row align-items-center">
                       <h5 class="m-0">{{ comen.usuario.Nombres }} {{ comen.usuario.Apellido }}</h5>
                       <!--Fecha y hora-->
+                      <button *ngIf="comen.Usuario_Carnet.toString() == usuario.Carne" class="pt-1 mb-2 align-self-end" style="background: none;border: none;"><i class="fas fa-trash-alt"
+                        style="font-size: large;"></i></button>
                       <p class="fecha-comentario m-0 ml-2"></p>
                     </div>
                     <!--Contenido del comentario-->

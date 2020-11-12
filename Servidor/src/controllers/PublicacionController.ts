@@ -32,7 +32,7 @@ class PublicacionController{
 
     public async delete(req:Request, res:Response){
         const {id} = req.params;
-        const usuario = await pool.query('DELETE FROM publicacion WHERE idPubliacacion = ?',[id]);
+        const usuario = await pool.query('DELETE FROM publicacion WHERE idPublicacion = ?',[id]);
         console.log(req.body);
         res.json({mensaje: 'La publicacion fue eliminada con exito'});
     }

@@ -6,7 +6,7 @@ import {AuxiliarService} from '../../services/auxiliar.service';
 import {CatedraticoService} from '../../services/catedratico.service';
 import {CursosService} from '../../services/cursos.service';
 import {CursoCatedraticoService} from '../../services/curso-catedratico.service';
-
+import * as alertify from 'alertifyjs';
 
 
 import {Usuario} from '../../models/usuario';
@@ -97,7 +97,10 @@ export class InicioComponent implements OnInit {
       },
       err => console.error(err)
     );
+    this.obtenerPublicaciones();
+  }
 
+  obtenerPublicaciones(): void{
     this.publicacionService.getPublicaciones().subscribe(
       res => {
         this.publicaciones = res;
@@ -112,7 +115,6 @@ export class InicioComponent implements OnInit {
       err => console.error(err)
     );
   }
-
   obtenerUsuario(): void{
     this.publicaciones.forEach(element => {
       this.usuarioService.getUsuario(element.Usuario_Carnet.toString()).subscribe(
@@ -242,22 +244,28 @@ export class InicioComponent implements OnInit {
       res => {
         this.publicacion.Comentarios = res;
         this.MostrarComentarios(this.publicacion.Comentarios, this.publicacion, true);
+        this.obtenerPublicaciones();
       },
       err => console.error(err)
     );
 
-    this.publicacionService.getPublicaciones().subscribe(
-      res => {
-        this.publicaciones = res;
-        this.obtenerUsuario();
-        this.obtenerAuxiliar();
-        this.obtenerCurso();
-        this.obtenerCatedratico();
-        this.obtenerCursoCatedratico();
-        this.CrearComentarios();
-        console.log(this.publicaciones);
+  }
+
+  eliminarComentario(): void{}
+  MostrarMensaje(idPublicacion: number): void{
+    alertify.confirm('Eliminar datos', '¿Esta seguro de eliminar la publicacion?',
+      res2 => {
+        this.publicacionService.delete(idPublicacion).subscribe(
+          res => {
+            this.obtenerPublicaciones();
+            alertify.success('Publicacion Eliminada con exito')
+          },
+          err => {console.log(err); alertify.error('Error al eliminar la publicacion')}
+        );
       },
-      err => console.error(err)
-    );
+      err => {
+        alertify.error('Cancelado');
+      }).set('labels', {ok: 'Eliminar', cancel: 'Cancelar'
+    });
   }
 }
