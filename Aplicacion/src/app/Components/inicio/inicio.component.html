@@ -39,10 +39,19 @@
                 </button>
               </div>
               <!-- Comentario -->
-              <div class="form-group p-2 bg-light" *ngIf="comentar">
+              <div class="form-group p-2 bg-light" *ngIf="comentar || editarC">
                 <label for="">Comentario</label>
                 <input type="text" [(ngModel)]="comentario.Mensaje" class="form-control">
-                <button class="btn btn-success btn-block mt-2" (click)="registrarComentario()">Comentar</button>
+                <button *ngIf="!editarC && comentar" class="btn btn-success btn-block mt-2" (click)="registrarComentario()">Comentar</button>
+                <div class="row">
+                  <div class="col col-6">
+                    <button *ngIf="editarC" class="btn btn-success btn-block mt-2" (click)="editarComentario()">Editar</button>
+                  </div>
+                  <div class="col col-6">
+                    <button *ngIf="editarC" class="btn btn-danger btn-block mt-2" (click)="editarC = false;comentario = comentarioaux">Cancelar</button>
+                  </div>
+                </div>
+
               </div>
               <div class="bg-white scroll p-2 {{ comentar ? 'vh65': 'vh83' }}">
 
@@ -56,8 +65,10 @@
                     <div class="titulo-comentario d-flex flex-row align-items-center">
                       <h5 class="m-0">{{ comen.usuario.Nombres }} {{ comen.usuario.Apellido }}</h5>
                       <!--Fecha y hora-->
-                      <button (click)="eliminarComentario(comen.idComentario)" *ngIf="comen.Usuario_Carnet.toString() == usuario.Carne"  class="pt-1 mb-2 align-self-end" style="background: none;border: none;"><i class="fas fa-trash-alt"
+                      <button (click)="eliminarComentario(comen.idComentario)" *ngIf="comen.Usuario_Carnet.toString() == usuario.Carne"  class="ml-3 align-self-end" style="background: none;border: none;"><i class="fas fa-trash-alt"
                         style="font-size: large;"></i></button>
+                        <button (click)="comentario = comen; editarC = true" *ngIf="comen.Usuario_Carnet.toString() == usuario.Carne"  class="ml-3 align-self-end" style="background: none;border: none;"><i class="fas fa-edit"
+                          style="font-size: large;"></i></button>
                       <p class="fecha-comentario m-0 ml-2"></p>
                     </div>
                     <!--Contenido del comentario-->

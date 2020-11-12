@@ -51,7 +51,13 @@ class ComentarioController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const usuario = yield database_1.default.query('UPDATE comentario set ? WHERE idComentario = ?', [req.body, id]);
+            var NuevoComentario = {
+                idComentario: req.body.idComentario,
+                Mensaje: req.body.Mensaje,
+                Publicacion_id: req.body.Publicacion_id,
+                Usuario_Carnet: req.body.Usuario_Carnet
+            };
+            const usuario = yield database_1.default.query('UPDATE comentario set ? WHERE idComentario = ?', [NuevoComentario, id]);
             res.json({ mensaje: 'El Comentario fue actualizado con exito' });
         });
     }

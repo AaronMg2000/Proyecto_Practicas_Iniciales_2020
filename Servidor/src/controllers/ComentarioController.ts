@@ -34,7 +34,13 @@ class ComentarioController{
 
     public async update(req:Request, res:Response){
         const {id} = req.params;
-        const usuario = await pool.query('UPDATE comentario set ? WHERE idComentario = ?',[req.body,id]);
+        var NuevoComentario={
+            idComentario: req.body.idComentario,
+            Mensaje: req.body.Mensaje,
+            Publicacion_id: req.body.Publicacion_id,
+            Usuario_Carnet: req.body.Usuario_Carnet
+        };
+        const usuario = await pool.query('UPDATE comentario set ? WHERE idComentario = ?',[NuevoComentario,id]);
         res.json({mensaje: 'El Comentario fue actualizado con exito'});
     }
 

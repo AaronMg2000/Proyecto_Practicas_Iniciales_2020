@@ -33,6 +33,8 @@ export class InicioComponent implements OnInit {
     };
 
     comentar: any = false;
+    editarC: any = false;
+    editarP: any = false;
     auxiliar: Auxiliar = {
       NoAuxiliar: 0,
       Nombres: '',
@@ -68,6 +70,15 @@ export class InicioComponent implements OnInit {
     };
 
     comentario: Comentario = {
+      idComentario: null,
+      Mensaje: '',
+      Publicacion_id: 0,
+      Usuario_Carnet: '',
+      usuario: this.usuario,
+      iniciales: ''
+    };
+
+    comentarioaux: Comentario = {
       idComentario: null,
       Mensaje: '',
       Publicacion_id: 0,
@@ -251,6 +262,20 @@ export class InicioComponent implements OnInit {
 
   }
 
+  editarComentario(): void{
+    this.comentarioService.update(this.comentario.idComentario, this.comentario).subscribe(
+      res => {
+            console.log(res);
+            this.comentario = this.comentarioaux;
+            const aux: any = this.comentar;
+            this.actualizarPublicacion(this.comentar);
+            this.comentar = aux;
+            this.editarC = false;
+            alertify.success('Comentario actualizado con exito');
+      }
+    );
+
+  }
   eliminarComentario(idComentario: number): void{
     alertify.confirm('Eliminar datos', '¿Esta seguro de eliminar la publicacion?',
       res2 => {
