@@ -233,17 +233,17 @@ export class InicioComponent implements OnInit {
       res => {
         console.log(res);
         this.comentario.Mensaje = '';
-        this.actualizarPublicacion();
+        this.actualizarPublicacion(true);
       },
       err => console.error(err)
     );
   }
 
-  actualizarPublicacion(): void{
+  actualizarPublicacion(con: any): void{
     this.comentarioService.getComentariosP(this.publicacion.idPublicacion).subscribe(
       res => {
         this.publicacion.Comentarios = res;
-        this.MostrarComentarios(this.publicacion.Comentarios, this.publicacion, true);
+        this.MostrarComentarios(this.publicacion.Comentarios, this.publicacion, con);
         this.obtenerPublicaciones();
       },
       err => console.error(err)
@@ -251,7 +251,25 @@ export class InicioComponent implements OnInit {
 
   }
 
-  eliminarComentario(): void{}
+  eliminarComentario(idComentario: number): void{
+    alertify.confirm('Eliminar datos', '¿Esta seguro de eliminar la publicacion?',
+      res2 => {
+        this.comentarioService.delete(idComentario).subscribe(
+          res => {
+            console.log(res);
+            this.comentario.Mensaje = '';
+            this.actualizarPublicacion(false);
+            this.comentar = false;
+            alertify.success('Comentario Eliminado con exito');
+          },
+          err => {console.log(err); alertify.error('Error al eliminar el comentario'); }
+        );
+      },
+      err => {
+        alertify.error('Cancelado');
+      }).set('labels', {ok: 'Eliminar', cancel: 'Cancelar'
+    });
+  }
   MostrarMensaje(idPublicacion: number): void{
     alertify.confirm('Eliminar datos', '¿Esta seguro de eliminar la publicacion?',
       res2 => {

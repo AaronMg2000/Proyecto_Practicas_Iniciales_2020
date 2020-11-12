@@ -56,7 +56,7 @@
                     <div class="titulo-comentario d-flex flex-row align-items-center">
                       <h5 class="m-0">{{ comen.usuario.Nombres }} {{ comen.usuario.Apellido }}</h5>
                       <!--Fecha y hora-->
-                      <button *ngIf="comen.Usuario_Carnet.toString() == usuario.Carne" class="pt-1 mb-2 align-self-end" style="background: none;border: none;"><i class="fas fa-trash-alt"
+                      <button (click)="eliminarComentario(comen.idComentario)" *ngIf="comen.Usuario_Carnet.toString() == usuario.Carne"  class="pt-1 mb-2 align-self-end" style="background: none;border: none;"><i class="fas fa-trash-alt"
                         style="font-size: large;"></i></button>
                       <p class="fecha-comentario m-0 ml-2"></p>
                     </div>
