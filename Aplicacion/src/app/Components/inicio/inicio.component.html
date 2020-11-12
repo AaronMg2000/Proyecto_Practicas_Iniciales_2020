@@ -6,24 +6,23 @@
       <div class="tarjetas-container">
 
         <!-- Componente Tarjeta -->
-        <div class="card p-3">
+        <div class="card p-3" *ngFor="let publi of publicaciones">
           <div class="d-flex justify-content-between">
-            <h5 class="pt-1 pb-1 text-black"><i class="fas fa-user-friends"></i> Erick Antillón </h5>
+            <h5 class="pt-1 pb-1 text-black"><i class="fas fa-user-friends"></i> {{ publi.Usuario.Nombres }} {{ publi.Usuario.Apellido }} </h5>
             <!-- Boton eliminar :v -->
             <button class="pt-1 mb-2" style="background: none;border: none;"><i class="fas fa-trash-alt"
                 style="font-size: large;"></i></button>
           </div>
           <hr class="mt-0 mb-2">
-          <div class="mb-1"><a href="#" class="text-primary ">Practicas iniciales - Seccion F</a></div>
-          <div class="mb-2"><a href="#" class="text-primary">Ing. Chocomax</a></div>
-          <p class="comentario-publicacion"><i class="fas fa-quote-left"></i> Comentario Lorem, ipsum dolor sit amet
-            consectetur
-            adipisicing elit. Non, id molestiae. Animi officia vel accusantium exercitationem adipisci, commodi
-            assumenda possimus.</p>
+          <div class="mb-1"><a href="#" class="text-primary ">{{ publi.curso.Nombre }}</a></div>
+          <div *ngIf="publi.catedratico.Nombres!=''" class="mb-2"><a href="#" class="text-primary">Ing. {{ publi.catedratico.Nombres }} {{ publi.catedratico.Apellidos }}</a></div>
+          <div *ngIf="publi.auxiliar.Nombres!=''" class="mb-2"><a href="#" class="text-primary">Aux. {{ publi.auxiliar.Nombres }} {{ publi.auxiliar.Apellidos }}</a></div>
+
+          <p class="comentario-publicacion"><i class="fas fa-quote-left"></i>{{ publi.Mensaje }}</p>
           <hr>
           <div class="botones-publicacion">
-            <a href="#" class="ver-comentarios mr-2 p-1" data-toggle="modal" data-target=".bd-example-modal-lg"><i
-                class="far fa-comment-alt"></i> Ver comentarios</a>
+            <a  class="ver-comentarios mr-2 p-1" (click)="MostrarComentarios(publi.Comentarios)" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+                class="far fa-comment-alt"></i> Ver {{ publi.NComentarios }} comentarios</a>
             <a href="#" class="comentar mr-2 p-1"><i class="far fa-edit"></i> Comentar</a>
             <a href="#" class="ver-perfil mr-2 p-1"><i class="far fa-user"></i> Ver perfil</a>
           </div>
@@ -32,37 +31,35 @@
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
           aria-hidden="true">
           <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content bg-primary" >
               <div class="comentarios-titulo p-3 d-flex flex-row justify-content-between">
-                <h4><i class="far fa-comment-alt mr-1"></i> Comentarios</h4>
+                <h4><i class="far fa-comment-alt mr-1 text-white"></i> Comentarios</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
                 </button>
               </div>
               <!-- Comentario -->
-              <div class="comentario d-flex align-items-center p-1 pl-2">
-                <!--Iniciales-->
-                <div class="logo-user-container d-flex mt-3 align-self-start">
-                  <div class="logo-user ">JR</div>
-                </div>
-                <div class="contenido p-3">
-                  <!--Div Titulo-->
-                  <div class="titulo-comentario d-flex flex-row align-items-center">
-                    <h5 class="m-0">Juanito Reyes</h5>
-                    <!--Fecha y hora-->
-                    <p class="fecha-comentario m-0 ml-2">11/11/2020, 01:52 p.m</p>
+              <div class="bg-white scroll p-2" style="max-height: 82vh;">
+                <div *ngFor="let comen of comentarios" class="comentario bg-light d-flex align-items-center p-1 pl-2" style="border-bottom:2px solid black;">
+                  <!--Iniciales-->
+                  <div class="logo-user-container d-flex mt-3 align-self-start">
+                    <div class="logo-user ">{{ comen.iniciales }}</div>
                   </div>
-                  <!--Contenido del comentario-->
-                  <div>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium officiis, minus cum
-                      voluptatum ullam, adipisci doloribus modi, dolores dolorum ratione alias temporibus nesciunt
-                      iusto. Blanditiis, doloribus quis aliquid rem sequi voluptatem cum vel, velit mollitia sunt porro
-                      fugit, nemo obcaecati?</p>
+                  <div class="contenido p-3">
+                    <!--Div Titulo-->
+                    <div class="titulo-comentario d-flex flex-row align-items-center">
+                      <h5 class="m-0">{{ comen.usuario.Nombres }} {{ comen.usuario.Apellido }}</h5>
+                      <!--Fecha y hora-->
+                      <p class="fecha-comentario m-0 ml-2"></p>
+                    </div>
+                    <!--Contenido del comentario-->
+                    <div>
+                      <p>{{ comen.Mensaje }}</p>
+                    </div>
                   </div>
                 </div>
               </div>
               <!-- Fin Comentario -->
-
             </div>
           </div>
         </div>

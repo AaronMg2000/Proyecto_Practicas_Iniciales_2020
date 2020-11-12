@@ -9,11 +9,12 @@ class ComentarioRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', ComentarioController_1.comentarioController.list);
-        this.router.post('/', ComentarioController_1.comentarioController.create);
+        this.router.get('/', verifyToken, ComentarioController_1.comentarioController.list);
+        this.router.get('/Lista/:id', verifyToken, ComentarioController_1.comentarioController.getList);
+        this.router.post('/', verifyToken, ComentarioController_1.comentarioController.create);
         this.router.delete('/:id', verifyToken, ComentarioController_1.comentarioController.delete);
         this.router.put('/:id', verifyToken, ComentarioController_1.comentarioController.update);
-        this.router.get('/:id', ComentarioController_1.comentarioController.get);
+        this.router.get('/:id', verifyToken, ComentarioController_1.comentarioController.get);
     }
 }
 function verifyToken(req, res, next) {

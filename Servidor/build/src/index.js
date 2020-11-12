@@ -11,6 +11,7 @@ const ComentarioRoutes_1 = __importDefault(require("./routes/ComentarioRoutes"))
 const PensumRoutes_1 = __importDefault(require("./routes/PensumRoutes"));
 const CursoRoutes_1 = __importDefault(require("./routes/CursoRoutes"));
 const CursosAprobadosRoutes_1 = __importDefault(require("./routes/CursosAprobadosRoutes"));
+const CursoCatedraticoRoutes_1 = __importDefault(require("./routes/CursoCatedraticoRoutes"));
 const PublicacionRoutes_1 = __importDefault(require("./routes/PublicacionRoutes"));
 const CatedraticoRoutes_1 = __importDefault(require("./routes/CatedraticoRoutes"));
 const morgan_1 = __importDefault(require("morgan"));
@@ -39,7 +40,7 @@ class Server {
         this.app.use('/Publicacion', PublicacionRoutes_1.default);
         this.app.use('/Curso', CursoRoutes_1.default);
         this.app.use('/CursoA', CursosAprobadosRoutes_1.default);
-        this.app.use('/CursoCatedratico', UsuarioRoutes_1.default);
+        this.app.use('/CursoCatedratico', CursoCatedraticoRoutes_1.default);
         this.app.use('/Pensum', PensumRoutes_1.default);
     }
     start() {

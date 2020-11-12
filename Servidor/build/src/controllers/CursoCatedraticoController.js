@@ -25,6 +25,7 @@ class CursoCatedratico {
     get(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
+            console.log('select * from curso_catedratico WHERE idCatedraticoCurso = ?', [id]);
             const usuario = yield database_1.default.query('select * from curso_catedratico WHERE idCatedraticoCurso = ?', [id]);
             if (usuario.length > 0) {
                 return res.json(usuario[0]);

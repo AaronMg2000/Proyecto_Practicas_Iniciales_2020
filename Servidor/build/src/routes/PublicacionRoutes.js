@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const PensumController_1 = require("../controllers/PensumController");
+const PublicacionController_1 = require("../controllers/PublicacionController");
 const jwt = require('jsonwebtoken');
 class PensumRoutes {
     constructor() {
@@ -9,8 +9,11 @@ class PensumRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', verifyToken, PensumController_1.pensumController.list);
-        this.router.get('/:id', verifyToken, PensumController_1.pensumController.get);
+        this.router.get('/', verifyToken, PublicacionController_1.publicacionController.list);
+        this.router.get('/:id', verifyToken, PublicacionController_1.publicacionController.get);
+        this.router.post('/', verifyToken, PublicacionController_1.publicacionController.create);
+        this.router.delete('/:id', verifyToken, verifyToken, PublicacionController_1.publicacionController.delete);
+        this.router.put('/:id', verifyToken, PublicacionController_1.publicacionController.update);
     }
 }
 function verifyToken(req, res, next) {

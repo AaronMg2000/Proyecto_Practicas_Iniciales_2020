@@ -6,6 +6,8 @@ import ComentarioRoutes from './routes/ComentarioRoutes';
 import PensumRoutes from './routes/PensumRoutes';
 import CursoRoutes from './routes/CursoRoutes';
 import CursosAprobadosRoutes from './routes/CursosAprobadosRoutes';
+import CursoCatedratico from './routes/CursoCatedraticoRoutes';
+
 import PublicacionRoutes from './routes/PublicacionRoutes';
 import CatedraticoRoutes from './routes/CatedraticoRoutes';
 
@@ -38,7 +40,7 @@ class Server{
         this.app.use('/Publicacion',PublicacionRoutes);
         this.app.use('/Curso',CursoRoutes);
         this.app.use('/CursoA',CursosAprobadosRoutes);
-        this.app.use('/CursoCatedratico',UsuarioRoutes);
+        this.app.use('/CursoCatedratico',CursoCatedratico);
         this.app.use('/Pensum',PensumRoutes);
     }
     start(): void{
