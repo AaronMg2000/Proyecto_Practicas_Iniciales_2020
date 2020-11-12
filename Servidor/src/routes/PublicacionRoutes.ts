@@ -1,5 +1,5 @@
 import {Request, Response, Router} from 'express';
-import {pensumController} from '../controllers/PensumController';
+import { publicacionController } from '../controllers/PublicacionController';
 const jwt = require('jsonwebtoken');
 
 class PensumRoutes{
@@ -9,9 +9,11 @@ class PensumRoutes{
         this.config();
     }
     config(): void{
-        this.router.get('/',verifyToken,pensumController.list);
-        this.router.get('/:id',verifyToken,pensumController.get);
-        
+        this.router.get('/',verifyToken,publicacionController.list);
+        this.router.get('/:id',verifyToken,publicacionController.get);
+        this.router.post('/',verifyToken,publicacionController.create);
+        this.router.delete('/:id',verifyToken,verifyToken,publicacionController.delete);
+        this.router.put('/:id',verifyToken,publicacionController.update);
     }
     
 }

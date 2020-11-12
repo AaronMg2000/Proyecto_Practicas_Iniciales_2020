@@ -18,24 +18,23 @@ const jwt = require('jsonwebtoken');
 class ComentarioController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const usuarios = yield database_1.default.query('select * from comentario');
+            const usuarios = yield database_1.default.query('select * from comentario ORDER BY idComentario desc');
             res.json(usuarios);
         });
     }
     getList(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const comentarios = yield database_1.default.query('select * from comentario where Publicacion_id = ?', [id]);
+            const comentarios = yield database_1.default.query('select * from comentario where Publicacion_id = ? ORDER BY idComentario desc', [id]);
             res.json(comentarios);
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var NuevoComentario = {
-                idComentario: req.body.idComentario,
                 Mensaje: req.body.Mensaje,
                 Publicacion_id: req.body.Publicacion_id,
-                Usuario_Carne: req.body.Usuario_Carne
+                Usuario_Carnet: req.body.Usuario_Carnet
             };
             yield database_1.default.query('INSERT INTO comentario set ?', [NuevoComentario]);
             res.status(200).json(NuevoComentario);
@@ -52,7 +51,13 @@ class ComentarioController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const usuario = yield database_1.default.query('UPDATE comentario set ? WHERE idComentario = ?', [req.body, id]);
+            var NuevoComentario = {
+                idComentario: req.body.idComentario,
+                Mensaje: req.body.Mensaje,
+                Publicacion_id: req.body.Publicacion_id,
+                Usuario_Carnet: req.body.Usuario_Carnet
+            };
+            const usuario = yield database_1.default.query('UPDATE comentario set ? WHERE idComentario = ?', [NuevoComentario, id]);
             res.json({ mensaje: 'El Comentario fue actualizado con exito' });
         });
     }

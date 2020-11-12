@@ -12,8 +12,8 @@ class CursoCatedratico{
  
      public async get(req:Request, res:Response){
          const {id} = req.params;
+         console.log('select * from curso_catedratico WHERE idCatedraticoCurso = ?',[id]);
          const usuario = await pool.query('select * from curso_catedratico WHERE idCatedraticoCurso = ?',[id]);
-         
          if(usuario.length > 0)
          {
              return res.json(usuario[0]);

@@ -37,4 +37,10 @@ i {
   text-align: center;
 }
 
+.vh83{
+  max-height: 83vh;
+}
+.vh65{
+  max-height: 65vh;
+}
 /* CSS Comentario unico */
