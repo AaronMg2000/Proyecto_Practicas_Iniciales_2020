@@ -14,7 +14,7 @@
               style="font-size: large;"></i></button>
           </div>
           <hr class="mt-0 mb-2">
-          <div class="mb-1"><a href="#" class="text-primary ">{{ publi.curso.Nombre }}</a></div>
+          <div *ngIf="publi.curso.Nombre!=''" class="mb-1"><a href="#" class="text-primary ">{{ publi.curso.CodigoCurso }} | {{ publi.curso.Nombre }}</a></div>
           <div *ngIf="publi.catedratico.Nombres!=''" class="mb-2"><a href="#" class="text-primary">Ing. {{ publi.catedratico.Nombres }} {{ publi.catedratico.Apellidos }}</a></div>
           <div *ngIf="publi.auxiliar.Nombres!=''" class="mb-2"><a href="#" class="text-primary">Aux. {{ publi.auxiliar.Nombres }} {{ publi.auxiliar.Apellidos }}</a></div>
 

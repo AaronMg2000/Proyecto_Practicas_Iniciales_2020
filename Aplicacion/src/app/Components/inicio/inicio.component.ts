@@ -400,43 +400,97 @@ export class InicioComponent implements OnInit {
     let numero;
 
     if  (this.publicacionNueva.Tipo === 1){
-      numero = $('#SelectCurso').val();
+      numero = $('#SelectCurso2').val();
       if (numero !== 0 && numero !== '' && numero !== isNaN && numero !== null && numero !== undefined){
         this.publicacionNueva.Curso_CodigoCurso = numero;
       }
     }
 
     if  (this.publicacionNueva.Tipo === 2){
-      numero = $('#SelectCurso').val();
+      numero = $('#SelectCate2').val();
       if (numero !== 0 && numero !== '' && numero !== isNaN && numero !== null && numero !== undefined){
-        this.publicacionNueva.Catedratico_NoCatedratico = Number($('#SelectCate').val());
+        this.publicacionNueva.Catedratico_NoCatedratico = Number($('#SelectCate2').val());
       }
     }
 
     if  (this.publicacionNueva.Tipo === 3){
-      numero = $('#SelectCurso').val();
+      numero = $('#SelectCateCur2').val();
       if (numero !== 0 && numero !== '' && numero !== isNaN && numero !== null && numero !== undefined){
-        this.publicacionNueva.idCatedraticoCursoP = Number($('#SelectCateCur').val());
-        console.log('entre');
+        this.publicacionNueva.idCatedraticoCursoP = Number($('#SelectCateCur2').val());
       }
     }
 
     if  (this.publicacionNueva.Tipo === 4){
-      numero = $('#SelectCurso').val();
+      numero = $('#SelectAux2').val();
       if (numero !== 0 && numero !== '' && numero !== isNaN && numero !== null && numero !== undefined){
-        this.publicacionNueva.Auxiliar_NoAuxiliar = Number($('#SelectAux').val());
-        console.log('entre');
+        this.publicacionNueva.Auxiliar_NoAuxiliar = Number($('#SelectAux2').val());
       }
     }
-    console.log(numero);
     if (this.publicacionNueva.Tipo != null){
       if ( this.publicacionNueva.Curso_CodigoCurso != null){
+        this.publicacionService.getPublicacionCurso(this.publicacionNueva.Curso_CodigoCurso).subscribe(
+          res => {
+            console.log(numero);
+            this.publicaciones = res;
+            this.obtenerUsuario();
+            this.obtenerAuxiliar();
+            this.obtenerCurso();
+            this.obtenerCatedratico();
+            this.obtenerCursoCatedratico();
+            this.CrearComentarios();
+            console.log(this.publicaciones);
+            alertify.success('Filtro generado');
+          },
+          err => {console.error(err); alertify.error('Error al crear el filtro');}
+        );
 
       }else if (this.publicacionNueva.idCatedraticoCursoP != null){
+        this.publicacionService.getPublicacionCursoCate(this.publicacionNueva.idCatedraticoCursoP).subscribe(
+          res => {
+            this.publicaciones = res;
+            this.obtenerUsuario();
+            this.obtenerAuxiliar();
+            this.obtenerCurso();
+            this.obtenerCatedratico();
+            this.obtenerCursoCatedratico();
+            this.CrearComentarios();
+            console.log(this.publicaciones);
+            alertify.success('Filtro generado');
+          },
+          err => {console.error(err); alertify.error('Error al crear el filtro');}
+        );
 
       }else if (this.publicacionNueva.Auxiliar_NoAuxiliar != null){
+        this.publicacionService.getPublicacionAux(this.publicacionNueva.Auxiliar_NoAuxiliar).subscribe(
+          res => {
+            this.publicaciones = res;
+            this.obtenerUsuario();
+            this.obtenerAuxiliar();
+            this.obtenerCurso();
+            this.obtenerCatedratico();
+            this.obtenerCursoCatedratico();
+            this.CrearComentarios();
+            console.log(this.publicaciones);
+            alertify.success('Filtro generado');
+          },
+          err => {console.error(err); alertify.error('Error al crear el filtro');}
+        );
 
       }else if (this.publicacionNueva.Catedratico_NoCatedratico != null){
+        this.publicacionService.getPublicacionCate(this.publicacionNueva.Catedratico_NoCatedratico).subscribe(
+          res => {
+            this.publicaciones = res;
+            this.obtenerUsuario();
+            this.obtenerAuxiliar();
+            this.obtenerCurso();
+            this.obtenerCatedratico();
+            this.obtenerCursoCatedratico();
+            this.CrearComentarios();
+            console.log(this.publicaciones);
+            alertify.success('Filtro generado');
+          },
+          err => {console.error(err); alertify.error('Error al crear el filtro');}
+        );
       }
       else{
         this.publicacionService.getPublicacion2(this.publicacionNueva.Tipo).subscribe(
