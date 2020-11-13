@@ -64,9 +64,11 @@ export class PensumComponent implements OnInit {
 
   obtenerPensum(semestre: number): void{
     this.cursoService.getListaSemestre(this.usuario.Carne, semestre).subscribe(
-      res =>{
-        this.pe
-      }
+      res => {
+        this.cursos = res;
+        console.log(this.cursos);
+      },
+      err => { console.error(err); alertify.error('Error al cargar cursos'); }
     );
   }
 

@@ -2,7 +2,7 @@
   <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header text-white" style="background-color: #0086c3;">
-        <h5 class="modal-title" id="exampleModalLongTitle">Agregar Curso</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Actualizar Contraseña</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -51,8 +51,8 @@
 
           <div class="modal-footer">
             <div class="col col-2">
-              <button class="btn btn-block btn-primary {{ password.errors || !reg || usuario.Password!= usuario.Confirmar || repassword.errors  ? '': 'd-none' }}" disabled>Registrar</button>
-              <button class="btn btn-block btn-primary {{ password.errors || !reg || usuario.Password!= usuario.Confirmar || repassword.errors  ? 'd-none': '' }}"(click)="ActualizarUsuario()">Registrar</button>
+              <button class="btn btn-block btn-primary {{ password.errors || !reg || usuario.Password!= usuario.Confirmar || repassword.errors  ? '': 'd-none' }}" disabled>Actualizar</button>
+              <button class="btn btn-block btn-primary {{ password.errors || !reg || usuario.Password!= usuario.Confirmar || repassword.errors  ? 'd-none': '' }}"(click)="ActualizarUsuario()">Actualizar</button>
             </div>
             <div class="col col-2">
               <button class="btt btn-dark btn-block redondear" data-dismiss="modal">Cancelar</button>
@@ -70,7 +70,7 @@
       </div>
       <div class="w-100 mt-md-5"></div>
       <div class="col col-md-6 col-lg-4">
-          <p class="w-100 text-center h4 font-weight-normal">INICIAR SESIÓN INGENIERIA USAC</p>
+          <p class="w-100 text-center h4 font-weight-normal">CAMBIO DE CONTRASEÑA</p>
       </div>
       <div class="w-100 mt-3"></div>
       <div class="col col-md-7 col-lg-5">
