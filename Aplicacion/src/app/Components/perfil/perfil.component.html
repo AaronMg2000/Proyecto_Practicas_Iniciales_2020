@@ -195,7 +195,7 @@
                         <th>Nombre del curso</th>
                         <th class="text-center">Nota</th>
                         <th class="text-center">Creditos</th>
-
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -204,6 +204,13 @@
                     <td>{{ curso.Nombre }}</td>
                     <td class="text-center">{{ curso.NotaAprobada }}</td>
                     <td class="text-center">{{ curso.Creditos }}</td>
+                    <td>
+                      <div class="row align-content-center justify-content-center">
+                        <div class="col col-8">
+                          <button class="btn btn-block btn-danger" (click)="eliminarCursoA(curso.IdCursoPensum)"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                 </tbody>
               </table>

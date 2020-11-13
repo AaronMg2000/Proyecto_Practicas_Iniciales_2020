@@ -135,6 +135,41 @@ export class PerfilComponent implements OnDestroy, OnInit {
     }
   }
 
+  eliminarCursoA(codigo: number): any{
+    alertify.confirm('Eliminar datos', '¿Esta seguro de eliminar el Curso aprobado?',
+      ress2 => {
+        this.cursosapService.delete(Number(this.usuario.Carne), codigo).subscribe(
+          res => {
+            alertify.success('Curso eliminado con exito');
+            this.cursoService.getListaCurso(this.usuario.Carne).subscribe(
+              res2 => {
+                this.cursos = res2;
+                this.cursosapService.getCursos(this.usuario.Carne).subscribe(
+                  res3 => {
+                    this.cursosAprobados = res3;
+
+                    this.obtenerCreditos();
+                    $('#CursoP').val('').trigger('change.select2');
+                    this.cursoAP.NotaAprobada = 61;
+                  },
+                  err3 => {console.log(err3); }
+                );
+                this.rerender();
+              },
+              err2 => console.log(err2)
+            );
+          },
+          err => {console.error(err); alertify.error('Error al eliminar el curso aprobado'); }
+        );
+      },
+      err => {
+        alertify.error('Cancelado');
+      }).set('labels', {ok: 'Eliminar', cancel: 'Cancelar'
+    });
+
+
+  }
+
   obtenerCreditos(): any{
     this.creditos = 0;
     this.cursosAprobados.forEach(element => {
