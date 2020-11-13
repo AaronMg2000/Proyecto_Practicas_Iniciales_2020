@@ -35,10 +35,9 @@
               <div class="comentarios-titulo p-3 d-flex bg-primary flex-row justify-content-between">
                 <h4><i class="far fa-comment-alt mr-1 text-white"></i> Comentarios</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
                 </button>
               </div>
-
               <!-- Comentario -->
               <div class="form-group p-2 bg-light" *ngIf="comentar || editarC">
                 <label for="">Comentario</label>
@@ -158,40 +157,10 @@
                     </div>
                   </div>
                 </div>
-        <!-- Modal Crear Comentario -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="far fa-edit"></i> Nuevo Comentario</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Autor:</label>
-                    <input type="text" class="form-control" id="recipient-name" disabled placeholder="El nombre del autor  no se:v">
-                  </div>
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Mensaje:</label>
-                    <textarea class="form-control" id="message-text"></textarea>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <!-- Botón Publicar-->
-                <button type="button" class="btn btn-primary">Publicar</button>
               </div>
             </div>
           </div>
         </div>
-        <!-- Fin Modal Crear Comentario -->
-
-
-
         <!-- ----------------Fin Tarjeta-------------- -->
 
       </div>
