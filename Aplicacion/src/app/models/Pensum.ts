@@ -1,8 +1,7 @@
-export interface Usuario {
-  Carne: string;
-  Nombres: string;
-  Apellido: string;
-  Password: string;
-  Confirmar: string;
-  Correo: string;
+export interface Pensum {
+  IdCursoPensum: number;
+  CodigoCurso: number;
+  Semestre: number;
+  Nombre: string;
+  Creditos: number;
 }
