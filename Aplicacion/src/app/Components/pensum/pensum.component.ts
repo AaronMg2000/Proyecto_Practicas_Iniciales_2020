@@ -23,7 +23,7 @@ declare let $: any;
 export class PensumComponent implements OnInit {
 
   creditos: any = 0;
-
+  semestre: any = 0;
   usuario: Usuario = {
     Carne: '',
     Nombres: '',
@@ -37,7 +37,8 @@ export class PensumComponent implements OnInit {
     Creditos: 0,
     IdCursoPensum: 0,
     Nombre: '',
-    Semestre: 0
+    Semestre: 0,
+    color: 0
   };
 
   cursos: Pensum[] = [];
@@ -66,10 +67,21 @@ export class PensumComponent implements OnInit {
     this.cursoService.getListaSemestre(this.usuario.Carne, semestre).subscribe(
       res => {
         this.cursos = res;
-        console.log(this.cursos);
+        this.semestre = semestre;
+        this.definirColores();
       },
       err => { console.error(err); alertify.error('Error al cargar cursos'); }
     );
   }
-
+  definirColores(): void{
+    let x = 1;
+    this.cursos.forEach(element => {
+      element.color = x;
+      if ( x >= 3){
+        x = 1;
+      }else{
+        x++;
+      }
+    });
+  }
 }

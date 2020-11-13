@@ -4,4 +4,5 @@ export interface Pensum {
   Semestre: number;
   Nombre: string;
   Creditos: number;
+  color: number;
 }
