@@ -41,7 +41,7 @@
               <!-- Comentario -->
               <div class="form-group p-2 bg-light" *ngIf="comentar || editarC">
                 <label for="">Comentario</label>
-                <textarea  [(ngModel)]="comentario.Mensaje" class="form-control" cols="100" rows="3"></textarea>
+                <textarea  [(ngModel)]="comentario.Mensaje" id="ComentarioN" class="form-control" cols="100" maxlength="2000" rows="3"></textarea>
                 <button *ngIf="!editarC && comentar" class="btn btn-success btn-block mt-2" (click)="registrarComentario()">Comentar</button>
                 <div class="row">
                   <div class="col col-6">
@@ -88,7 +88,7 @@
           <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header text-white" style="background-color: #0086c3;">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modificar Datos</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Crear Publicación</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -140,7 +140,7 @@
                   <div class="col col-12">
                     <div class="form-group">
                       <label for="">Mensaje</label>
-                      <textarea name="Mensaje" required id="Mensaje" [(ngModel)]="publicacionNueva.Mensaje" rows="4" class="form-control"></textarea>
+                      <textarea maxlength="2000" name="Mensaje" required id="Mensaje" [(ngModel)]="publicacionNueva.Mensaje" rows="4" class="form-control"></textarea>
                     </div>
                   </div>
                   <div class="col col-12">
@@ -166,7 +166,7 @@
           <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header text-white" style="background-color: #0086c3;">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modificar Datos</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Filtrar Publicación</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>

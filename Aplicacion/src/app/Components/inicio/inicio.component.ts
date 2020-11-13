@@ -523,6 +523,8 @@ export class InicioComponent implements OnInit {
   }
 
   MostrarComentarios(comentarios: Comentario[], publi: Publicacion, com: any): void{
+    this.comentario = this.comentarioaux;
+    this.comentario.Mensaje = '';
     this.comentarios = comentarios;
     this.comentar = com;
     this.publicacion = publi;
