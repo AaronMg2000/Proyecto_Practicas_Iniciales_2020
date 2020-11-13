@@ -41,6 +41,13 @@ class CodigoCurso {
             res.json(Cursos);
         });
     }
+    listSemestre(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id, id2 } = req.params;
+            const Cursos = yield database_1.default.query('select IdCursoPensum,CodigoCurso, Nombre from pensum t1 INNER JOIN curso t3 ON t1.Curso_CodigoCurso = t3.CodigoCurso where t1.IdCursoPensum NOT IN (select CursoP from cursosaprobados where CarnetU = ?) and t1.Semestre', [id, id2]);
+            res.json(Cursos);
+        });
+    }
 }
 exports.codigoCurso = new CodigoCurso();
 //# sourceMappingURL=CursoController.js.map

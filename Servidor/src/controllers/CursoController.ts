@@ -29,6 +29,12 @@ class CodigoCurso{
         res.json(Cursos);
     }
 
+    public async listSemestre(req:Request, res:Response){
+        const {id,id2} = req.params;
+        const Cursos = await pool.query('select IdCursoPensum,CodigoCurso, Nombre from pensum t1 INNER JOIN curso t3 ON t1.Curso_CodigoCurso = t3.CodigoCurso where t1.IdCursoPensum NOT IN (select CursoP from cursosaprobados where CarnetU = ?) and t1.Semestre',[id,id2]);
+        res.json(Cursos);
+    }
+
 }
 
 export const codigoCurso = new CodigoCurso();

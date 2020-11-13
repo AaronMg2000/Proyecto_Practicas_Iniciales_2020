@@ -1,0 +1,65 @@
+h2{
+	padding-left: 60px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+
+.boton1, .boton2, .boton3{
+	height: 150%;
+ 	width: 100%;
+ 	font-weight: bold;
+ 	text-align: center;
+}
+
+.boton1{
+	background-color: #197d98;
+	color: white;
+}
+
+.boton2{
+	background-color: #1C4A59;
+	color: white;
+}
+
+.boton3{
+	background-color: #121C21;
+	color: white;
+}
+
+.labelder{
+	text-align: right;
+	border: 5px;
+}
+
+.labelizq{
+	text-align: left;
+	border: 5px;
+}
+
+body{
+	background-color: #F0F0F0;
+}
+
+col{
+	border: 1px solid #ddd;
+	height: 100%;
+}
+
+hr{
+	visibility: false;
+	background-color: #F0F0F0;
+}
+
+.zoom {
+  transition: transform .2s;
+  margin: 0 auto;
+  border-radius:20px;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
+}
+
