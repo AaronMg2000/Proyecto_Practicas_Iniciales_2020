@@ -22,4 +22,8 @@ export class CursosService {
   getListaCurso(id: string): any{
     return this.http.get<any>(`${this.API_URI}/Curso/Lista/${id}`);
   }
+
+  getListaSemestre(id: string, id2: number): any{
+    return this.http.get<any>(`${this.API_URI}/Curso/Semestre/${id}/${id2}`);
+  }
 }
