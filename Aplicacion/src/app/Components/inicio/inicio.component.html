@@ -11,7 +11,7 @@
             <h5 class="pt-1 pb-1 text-black"><i class="fas fa-user-friends"></i> {{ publi.Usuario.Nombres }} {{ publi.Usuario.Apellido }} </h5>
             <!-- Boton eliminar :v -->
             <button *ngIf="publi.Usuario_Carnet.toString() == usuario.Carne" class="pt-1 mb-2" (click)="MostrarMensaje(publi.idPublicacion)" style="background: none;border: none;"><i class="fas fa-trash-alt"
-                style="font-size: large;"></i></button>
+              style="font-size: large;"></i></button>
           </div>
           <hr class="mt-0 mb-2">
           <div class="mb-1"><a href="#" class="text-primary ">{{ publi.curso.Nombre }}</a></div>
@@ -24,7 +24,7 @@
             <a href="#" class="ver-comentarios mr-2 p-1" (click)="MostrarComentarios(publi.Comentarios, publi,false)" data-toggle="modal" data-target=".bd-example-modal-lg"><i
                 class="far fa-comment-alt"></i> Ver {{ publi.NComentarios }} comentarios</a>
             <a href="#" class="comentar mr-2 p-1" (click)="MostrarComentarios(publi.Comentarios, publi,true)" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="far fa-edit"></i> Comentar</a>
-            <a href="#" class="ver-perfil mr-2 p-1"><i class="far fa-user"></i> Ver perfil</a>
+            <a href="#" [routerLink] = "['/Usuario/', publi.Usuario_Carnet]" class="ver-perfil mr-2 p-1"><i class="far fa-user"></i> Ver perfil</a>
           </div>
         </div>
         <!-- Modal Comentarios Tarjeta -->
@@ -41,7 +41,7 @@
               <!-- Comentario -->
               <div class="form-group p-2 bg-light" *ngIf="comentar || editarC">
                 <label for="">Comentario</label>
-                <input type="text" [(ngModel)]="comentario.Mensaje" class="form-control">
+                <textarea  [(ngModel)]="comentario.Mensaje" class="form-control" cols="100" rows="3"></textarea>
                 <button *ngIf="!editarC && comentar" class="btn btn-success btn-block mt-2" (click)="registrarComentario()">Comentar</button>
                 <div class="row">
                   <div class="col col-6">
@@ -83,10 +83,94 @@
           </div>
         </div>
         <!-- Fin Modal Comentarios -->
+        <!--Modal Creacion de Publicacion-->
+        <div class="modal fade" id="Publicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-white" style="background-color: #0086c3;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modificar Datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col col-12">
+                    <label for="">Tipo de Publicacion</label>
+                    <div class="row justify-content-around">
+                      <div class="col col-3"><input name="tipo" id="cursoR" type="radio"  (click)="iniciarSelect(1);"> Curso</div>
+                      <div class="col col-3"><input name="tipo" id="cateR" type="radio" (click)="iniciarSelect(2)"> Catedratico</div>
+                      <div class="col col-3"><input name="tipo" id="auxR" type="radio" (click)="iniciarSelect(4)"> Auxiliar</div>
+                      <div class="col col-3"><input name="tipo" id="cursoCateR" type="radio" (click)="iniciarSelect(3)"> Curso y Catedratico</div>
+                    </div>
+                  </div>
+                  <div class="col col-12">
+                    <div class="form-group">
+                      <div *ngIf="publicacionNueva.Tipo==1">
+                        <label for="">Curso</label>
+                        <select class="form-control" name="SelectCurso" [(ngModel)]="publicacionNueva.idCatedraticoCursoP" select2 id="SelectCurso" style="width: 100%;">
+                          <option value="">Seleccionar</option>
+                          <option *ngFor="let curso of cursos" value="{{ curso.CodigoCurso }}">{{ curso.CodigoCurso }} | {{ curso.Nombre }}</option>
+                        </select>
+                      </div>
+                      <div *ngIf="publicacionNueva.Tipo==2">
+                        <label for="">Catedratico</label>
+                        <select class="form-control" name="SelectCate" [(ngModel)]="publicacionNueva.Catedratico_NoCatedratico" select2 id="SelectCate" style="width: 100%;">
+                          <option value="">Seleccionar</option>
+                          <option *ngFor="let catedratico of catedraticos" value="{{ catedratico.NoCatedratico }}">{{ catedratico.Nombres }} {{ catedratico.Apellidos }}</option>
+                        </select>
+                      </div>
+                      <div *ngIf="publicacionNueva.Tipo==3">
+                        <label for="">Curso y Catedratico</label>
+                        <select class="form-control" name="SelectCateCur" [(ngModel)]="publicacionNueva.idCatedraticoCursoP" select2 id="SelectCateCur" style="width: 100%;">
+                          <option value="">Seleccionar</option>
+                          <option *ngFor="let cursocate of cursocatedraticos" value="{{ cursocate.idCatedraticoCurso }}">{{ cursocate.catedratico.Nombres }} {{ cursocate.catedratico.Apellidos }} | {{ cursocate.auxiliar.Nombres }} {{ cursocate.auxiliar.Apellidos }} | {{ cursocate.curso.CodigoCurso  }} - {{ cursocate.curso.Nombre }} </option>
+                        </select>
+                      </div>
+                      <div *ngIf="publicacionNueva.Tipo==4">
+                        <label for="">Auxiliar</label>
+                        <select class="form-control" name="SelectAux" [(ngModel)]="publicacionNueva.Auxiliar_NoAuxiliar" select2 id="SelectAux" style="width: 100%;">
+                          <option value="">Seleccionar</option>
+                          <option *ngFor="let auxiliars of auxiliares" value="{{ auxiliars.NoAuxiliar }}">{{ auxiliars.Nombres }} {{ auxiliars.Apellidos }}</option>
+                        </select>
+                      </div>
+                    </div>
 
+                  </div>
+                  <div class="col col-12">
+                    <div class="form-group">
+                      <label for="">Mensaje</label>
+                      <textarea name="Mensaje" required id="Mensaje" [(ngModel)]="publicacionNueva.Mensaje" rows="4" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <div class="col col-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col col-6">
+                          <button class="btn btn-success btn-block" *ngIf="!editarP" data-dismiss="modal" aria-label="Close" (click)="crearPublicacion()">Publicar</button>
+                          <button class="btn btn-success btn-block" *ngIf="editarP" data-dismiss="modal" aria-label="Close" (click)="crearPublicacion()">Editar</button>
+                        </div>
+                        <div class="col col-6">
+                          <button class="btn btn-danger btn-block" (click)="desactivar();editarP=false" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- ----------------Fin Tarjeta-------------- -->
 
       </div>
+      <a class='flotante bg-primary text-center text-white font-weight-bold' href='#' (click)="editarP = false; publicacionNueva = publicacionNueva2; desactivar();"  data-toggle="modal" data-target="#Publicacion">
+        <div class="row h-100 align-content-center justify-content-center">
+          <div class="col col-12 text-center">
+            <i class="fas fa-plus text-white"style="font-size: large;"></i>
+          </div>
+        </div>
+      </a>
     </section>
   </div>
 </div>

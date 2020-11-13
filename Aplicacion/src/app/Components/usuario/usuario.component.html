@@ -1,22 +1,66 @@
+
 <div id="app" class="wrapper">
-  <app-principal></app-principal  >
+  <app-principal></app-principal>
   <div class="content-wrapper">
-      <section class="p-2 container-fluid">
-          <div class="row">
-            <div class="col-md-4" *ngFor="let usuario of usuarios">
-              <div class="card text-center">
-                <div class="card-header">
-                  {{ usuario.Carne }}
+    <section class="p-2 container-fluid p-4">
+      <div class="row" style="height: 27vh;">
+        <div class="col col-12 col-md-9 h-100">
+          <div class="card h-100" style="border-radius: 40px;">
+            <div class="card-body">
+              <div class="w-100">
+                <div class="row justify-content-around">
+                  <div class="col col-md-2">
+                    <img src="assets/public/IMG/FACING.png" alt="" class="card-img-top">
+                  </div>
+                  <div class="col col-12 col-md-9">
+                    <div class="row h-100 align-content-around">
+                      <div class="col col-12">
+                        <p class="w-100 h1" style="font-family: ubuntu;">{{ usuario.Nombres }} {{ usuario.Apellido }}</p>
+                        <p class="w-100 h5" style="font-family: ubuntu;">{{ usuario.Correo }}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="card-body">
-                  <p class="w-100">{{ usuario.Nombres }}</p>
-                  <p class="w-100">{{ usuario.Apellido }}</p>
-                  <p class="w-100">{{ usuario.Correo }}</p>
-                </div>
-                <div class="card-footer"></div>
               </div>
             </div>
           </div>
-      </section>
+        </div>
+        <div class="col col-12 col-md-3 h-100">
+          <div class="card h-100" style="border-radius: 40px;">
+            <div class="card-body">
+              <div class="w-100 text-center">
+                <p class="w-100 h4">Creditos</p>
+                <p class="display-3">{{ creditos }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-12 mt-4" style="max-height: 57vh;">
+          <div class="card h-100 scroll" style="border-radius: 10px;">
+            <div class="card-body" id="DivTable">
+              <table id="TablaCurso" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="TablaCursos" class="table table-bordered" style="width:100%">
+                <thead class="colorTabla text-white font-weight-bold">
+                    <tr>
+                        <th class="text-center">Codigo</th>
+                        <th>Nombre del curso</th>
+                        <th class="text-center">Nota</th>
+                        <th class="text-center">Creditos</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let curso of cursosAprobados">
+                    <td class="text-center">{{ curso.CodigoCurso }}</td>
+                    <td>{{ curso.Nombre }}</td>
+                    <td class="text-center">{{ curso.NotaAprobada }}</td>
+                    <td class="text-center">{{ curso.Creditos }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>

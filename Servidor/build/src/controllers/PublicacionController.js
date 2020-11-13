@@ -56,7 +56,18 @@ class PublicacionController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const usuario = yield database_1.default.query('UPDATE publicacion set ? WHERE idPublicacion = ?', [req.body, id]);
+            var NuevaPublicacion = {
+                idPublicacion: req.body.idPublicacion,
+                Mensaje: req.body.Mensaje,
+                Usuario_Carnet: req.body.Usuario_Carnet,
+                Fecha_Date: req.body.Fecha_Date,
+                idCatedraticoCursoP: req.body.idCatedraticoCursoP,
+                Curso_CodigoCurso: req.body.Curso_CodigoCurso,
+                Catedratico_NoCatedratico: req.body.Catedratico_NoCatedratico,
+                Auxiliar_NoAuxiliar: req.body.Auxiliar_NoAuxiliar,
+                Tipo: req.body.Tipo
+            };
+            const usuario = yield database_1.default.query('UPDATE publicacion set ? WHERE idPublicacion = ?', [NuevaPublicacion, id]);
             res.json({ mensaje: 'La publicacion fue actualizado con exito' });
         });
     }
