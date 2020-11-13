@@ -15,6 +15,36 @@ class PublicacionController{
         res.json(comentarios);
     }
 
+    public async getList2(req: Request, res: Response){
+        const {id} = req.params;
+        const comentarios = await pool.query('select * from publicacion where Tipo = ? ORDER BY idPublicacion desc',[id]);
+        res.json(comentarios);
+    }
+
+    public async getListCate(req: Request, res: Response){
+        const {id} = req.params;
+        const comentarios = await pool.query('select * from publicacion where Catedratico_NoCatedratico = ? ORDER BY idPublicacion desc',[id]);
+        res.json(comentarios);
+    }
+
+    public async getListAuxi(req: Request, res: Response){
+        const {id} = req.params;
+        const comentarios = await pool.query('select * from publicacion where Auxiliar_NoAuxiliar = ? ORDER BY idPublicacion desc',[id]);
+        res.json(comentarios);
+    }
+
+    public async getListCurso(req: Request, res: Response){
+        const {id} = req.params;
+        const comentarios = await pool.query('select * from publicacion where Curso_CodigoCurso = ? ORDER BY idPublicacion desc',[id]);
+        res.json(comentarios);
+    }
+
+    public async getListCursoCate(req: Request, res: Response){
+        const {id} = req.params;
+        const comentarios = await pool.query('select * from publicacion where idCatedraticoCursoP = ? ORDER BY idPublicacion desc',[id]);
+        res.json(comentarios);
+    }
+
     public async create (req: Request, res: Response){
         var NuevaPublicacion={
             Mensaje: req.body.Mensaje,

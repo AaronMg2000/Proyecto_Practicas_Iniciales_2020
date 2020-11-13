@@ -53,4 +53,13 @@ i {
   width: 50px;
   border-radius: 100%;
 }
+.flotante2 {
+  display:scroll;
+      position:fixed;
+      bottom:5px;
+      right:65px;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+}
 /* CSS Comentario unico */

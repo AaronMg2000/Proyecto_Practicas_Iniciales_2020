@@ -161,6 +161,78 @@
             </div>
           </div>
         </div>
+        <!--Filtro modal-->
+        <div class="modal fade" id="Filtro" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-white" style="background-color: #0086c3;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modificar Datos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col col-12">
+                    <label for="">Tipo de Publicacion</label>
+                    <div class="row justify-content-around">
+                      <div class="col col-3"><input name="tipo2" id="cursoR2" type="radio"  (click)="iniciarSelect(1);"> Curso</div>
+                      <div class="col col-3"><input name="tipo2" id="cateR2" type="radio" (click)="iniciarSelect(2)"> Catedratico</div>
+                      <div class="col col-3"><input name="tipo2" id="auxR2" type="radio" (click)="iniciarSelect(4)"> Auxiliar</div>
+                      <div class="col col-3"><input name="tipo2" id="cursoCateR2" type="radio" (click)="iniciarSelect(3)"> Curso y Catedratico</div>
+                    </div>
+                  </div>
+                  <div class="col col-12">
+                    <div class="form-group">
+                      <div *ngIf="publicacionNueva.Tipo==1">
+                        <label for="">Curso</label>
+                        <select class="form-control" name="SelectCurso2" [(ngModel)]="publicacionNueva.idCatedraticoCursoP" select2 id="SelectCurso2" style="width: 100%;">
+                          <option value="">Seleccionar</option>
+                          <option *ngFor="let curso of cursos" value="{{ curso.CodigoCurso }}">{{ curso.CodigoCurso }} | {{ curso.Nombre }}</option>
+                        </select>
+                      </div>
+                      <div *ngIf="publicacionNueva.Tipo==2">
+                        <label for="">Catedratico</label>
+                        <select class="form-control" name="SelectCate2" [(ngModel)]="publicacionNueva.Catedratico_NoCatedratico" select2 id="SelectCate2" style="width: 100%;">
+                          <option value="">Seleccionar</option>
+                          <option *ngFor="let catedratico of catedraticos" value="{{ catedratico.NoCatedratico }}">{{ catedratico.Nombres }} {{ catedratico.Apellidos }}</option>
+                        </select>
+                      </div>
+                      <div *ngIf="publicacionNueva.Tipo==3">
+                        <label for="">Curso y Catedratico</label>
+                        <select class="form-control" name="SelectCateCur2" [(ngModel)]="publicacionNueva.idCatedraticoCursoP" select2 id="SelectCateCur2" style="width: 100%;">
+                          <option value="">Seleccionar</option>
+                          <option *ngFor="let cursocate of cursocatedraticos" value="{{ cursocate.idCatedraticoCurso }}">{{ cursocate.catedratico.Nombres }} {{ cursocate.catedratico.Apellidos }} | {{ cursocate.auxiliar.Nombres }} {{ cursocate.auxiliar.Apellidos }} | {{ cursocate.curso.CodigoCurso  }} - {{ cursocate.curso.Nombre }} </option>
+                        </select>
+                      </div>
+                      <div *ngIf="publicacionNueva.Tipo==4">
+                        <label for="">Auxiliar</label>
+                        <select class="form-control" name="SelectAux2" [(ngModel)]="publicacionNueva.Auxiliar_NoAuxiliar" select2 id="SelectAux2" style="width: 100%;">
+                          <option value="">Seleccionar</option>
+                          <option *ngFor="let auxiliars of auxiliares" value="{{ auxiliars.NoAuxiliar }}">{{ auxiliars.Nombres }} {{ auxiliars.Apellidos }}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="col col-12">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col col-6">
+                          <button class="btn btn-success btn-block" data-dismiss="modal" aria-label="Close" (click)="CrearFiltro()">Filtrar</button>
+                        </div>
+                        <div class="col col-6">
+                          <button class="btn btn-danger btn-block" (click)="desactivar();obtenerPublicaciones();" data-dismiss="modal" aria-label="Close">Eliminar Filtro</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- ----------------Fin Tarjeta-------------- -->
 
       </div>
@@ -168,6 +240,13 @@
         <div class="row h-100 align-content-center justify-content-center">
           <div class="col col-12 text-center">
             <i class="fas fa-plus text-white"style="font-size: large;"></i>
+          </div>
+        </div>
+      </a>
+      <a class='flotante2 bg-primary text-center text-white font-weight-bold' href='#' (click)="editarP = false; publicacionNueva = publicacionNueva2; desactivar();"  data-toggle="modal" data-target="#Filtro">
+        <div class="row h-100 align-content-center justify-content-center">
+          <div class="col col-12 text-center">
+            <i class="fas fa-filter text-white"style="font-size: large;"></i>
           </div>
         </div>
       </a>

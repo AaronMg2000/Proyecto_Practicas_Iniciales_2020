@@ -11,6 +11,11 @@ class PensumRoutes {
     config() {
         this.router.get('/', verifyToken, PublicacionController_1.publicacionController.list);
         this.router.get('/:id', verifyToken, PublicacionController_1.publicacionController.get);
+        this.router.get('/Tipo/:id', verifyToken, PublicacionController_1.publicacionController.getList2);
+        this.router.get('/Curso/:id', verifyToken, PublicacionController_1.publicacionController.getListCurso);
+        this.router.get('/CursoCate/:id', verifyToken, PublicacionController_1.publicacionController.getListCursoCate);
+        this.router.get('/Aux/:id', verifyToken, PublicacionController_1.publicacionController.getListAuxi);
+        this.router.get('/Cate/:id', verifyToken, PublicacionController_1.publicacionController.getListCate);
         this.router.post('/', verifyToken, PublicacionController_1.publicacionController.create);
         this.router.delete('/:id', verifyToken, verifyToken, PublicacionController_1.publicacionController.delete);
         this.router.put('/:id', verifyToken, PublicacionController_1.publicacionController.update);

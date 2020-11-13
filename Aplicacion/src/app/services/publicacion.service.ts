@@ -20,6 +20,23 @@ export class PublicacionService {
     return this.http.get<any>(`${this.API_URI}/Publicacion/${id}`);
   }
 
+  getPublicacion2(id: number): any{
+    return this.http.get<any>(`${this.API_URI}/Publicacion/Tipo/${id}`);
+  }
+
+  getPublicacionCate(id: number): any{
+    return this.http.get<any>(`${this.API_URI}/Publicacion/Cate/${id}`);
+  }
+  getPublicacionCurso(id: number): any{
+    return this.http.get<any>(`${this.API_URI}/Publicacion/Curso/${id}`);
+  }
+  getPublicacionCursoCate(id: number): any{
+    return this.http.get<any>(`${this.API_URI}/Publicacion/CursoCate/${id}`);
+  }
+  getPublicacionAux(id: number): any{
+    return this.http.get<any>(`${this.API_URI}/Publicacion/Aux/${id}`);
+  }
+
   delete(id: number): any{
     return this.http.delete<any>(`${this.API_URI}/Publicacion/${id}`);
   }

@@ -29,6 +29,41 @@ class PublicacionController {
             res.json(comentarios);
         });
     }
+    getList2(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const comentarios = yield database_1.default.query('select * from publicacion where Tipo = ? ORDER BY idPublicacion desc', [id]);
+            res.json(comentarios);
+        });
+    }
+    getListCate(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const comentarios = yield database_1.default.query('select * from publicacion where Catedratico_NoCatedratico = ? ORDER BY idPublicacion desc', [id]);
+            res.json(comentarios);
+        });
+    }
+    getListAuxi(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const comentarios = yield database_1.default.query('select * from publicacion where Auxiliar_NoAuxiliar = ? ORDER BY idPublicacion desc', [id]);
+            res.json(comentarios);
+        });
+    }
+    getListCurso(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const comentarios = yield database_1.default.query('select * from publicacion where Curso_CodigoCurso = ? ORDER BY idPublicacion desc', [id]);
+            res.json(comentarios);
+        });
+    }
+    getListCursoCate(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const comentarios = yield database_1.default.query('select * from publicacion where idCatedraticoCursoP = ? ORDER BY idPublicacion desc', [id]);
+            res.json(comentarios);
+        });
+    }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var NuevaPublicacion = {

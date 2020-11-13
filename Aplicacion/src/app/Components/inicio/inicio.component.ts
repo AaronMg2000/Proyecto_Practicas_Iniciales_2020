@@ -213,6 +213,14 @@ export class InicioComponent implements OnInit {
       $('#SelectAux').val('').trigger('change.select2');
       $('#SelectCate').val('').trigger('change.select2');
       $('#SelectCateCur').val('').trigger('change.select2');
+      $('#SelectCurso2').select2();
+      $('#SelectAux2').select2();
+      $('#SelectCate2').select2();
+      $('#SelectCateCur2').select2();
+      $('#SelectCurso2').val('').trigger('change.select2');
+      $('#SelectAux2').val('').trigger('change.select2');
+      $('#SelectCate2').val('').trigger('change.select2');
+      $('#SelectCateCur2').val('').trigger('change.select2');
     }, 50);
     this.publicacionNueva.Auxiliar_NoAuxiliar = null;
     this.publicacionNueva.Catedratico_NoCatedratico = null;
@@ -242,6 +250,10 @@ export class InicioComponent implements OnInit {
     $('#auxR').prop('checked', false);
     $('#cateR').prop('checked', false);
     $('#cursoR').prop('checked', false);
+    $('#cursoCateR2').prop('checked', false);
+    $('#auxR2').prop('checked', false);
+    $('#cateR2').prop('checked', false);
+    $('#cursoR2').prop('checked', false);
   }
   obtenerUsuario(): void{
     this.publicaciones.forEach(element => {
@@ -300,6 +312,7 @@ export class InicioComponent implements OnInit {
   }
 
   obtenerCursoCatedratico(): void{
+
     this.publicaciones.forEach(element => {
       if (element.idCatedraticoCursoP != null){
         this.cursoCatedraticoService.getCursoCate(element.idCatedraticoCursoP).subscribe(
@@ -377,6 +390,73 @@ export class InicioComponent implements OnInit {
         err => console.error(err)
       );
     });
+  }
+
+  CrearFiltro(): void{
+    this.publicacionNueva.Auxiliar_NoAuxiliar = null;
+    this.publicacionNueva.Catedratico_NoCatedratico = null;
+    this.publicacionNueva.Curso_CodigoCurso = null;
+    this.publicacionNueva.idCatedraticoCursoP = null;
+    let numero;
+
+    if  (this.publicacionNueva.Tipo === 1){
+      numero = $('#SelectCurso').val();
+      if (numero !== 0 && numero !== '' && numero !== isNaN && numero !== null && numero !== undefined){
+        this.publicacionNueva.Curso_CodigoCurso = numero;
+      }
+    }
+
+    if  (this.publicacionNueva.Tipo === 2){
+      numero = $('#SelectCurso').val();
+      if (numero !== 0 && numero !== '' && numero !== isNaN && numero !== null && numero !== undefined){
+        this.publicacionNueva.Catedratico_NoCatedratico = Number($('#SelectCate').val());
+      }
+    }
+
+    if  (this.publicacionNueva.Tipo === 3){
+      numero = $('#SelectCurso').val();
+      if (numero !== 0 && numero !== '' && numero !== isNaN && numero !== null && numero !== undefined){
+        this.publicacionNueva.idCatedraticoCursoP = Number($('#SelectCateCur').val());
+        console.log('entre');
+      }
+    }
+
+    if  (this.publicacionNueva.Tipo === 4){
+      numero = $('#SelectCurso').val();
+      if (numero !== 0 && numero !== '' && numero !== isNaN && numero !== null && numero !== undefined){
+        this.publicacionNueva.Auxiliar_NoAuxiliar = Number($('#SelectAux').val());
+        console.log('entre');
+      }
+    }
+    console.log(numero);
+    if (this.publicacionNueva.Tipo != null){
+      if ( this.publicacionNueva.Curso_CodigoCurso != null){
+
+      }else if (this.publicacionNueva.idCatedraticoCursoP != null){
+
+      }else if (this.publicacionNueva.Auxiliar_NoAuxiliar != null){
+
+      }else if (this.publicacionNueva.Catedratico_NoCatedratico != null){
+      }
+      else{
+        this.publicacionService.getPublicacion2(this.publicacionNueva.Tipo).subscribe(
+          res => {
+            this.publicaciones = res;
+            this.obtenerUsuario();
+            this.obtenerAuxiliar();
+            this.obtenerCurso();
+            this.obtenerCatedratico();
+            this.obtenerCursoCatedratico();
+            this.CrearComentarios();
+            console.log(this.publicaciones);
+            alertify.success('Filtro generado');
+          },
+          err => {console.error(err); alertify.error('Error al crear el filtro');}
+        );
+      }
+    }else{
+      alertify.error('Error al crear el filtro');
+    }
   }
 
   contarComentario(): void{
